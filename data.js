@@ -1,261 +1,435 @@
-const hotels = [
-    {
-      name: "Antonio Resort ",
-      numberOfRooms: 150,
-      starRating: 3,
-      distanceFromBeach: "100m",
-      amenities: ["Swimming Pool", "Free WiFi", "Spa", "Gym", "Restaurant", "Bar", "Free Parking"],
-      roomTypes: [
-        { type: "Deluxe Room", price: 200 },
-        { type: "Suite", price: 350 },
-        { type: "Family Room", price: 400 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Ocean+Breeze+Resort"
+// data.js
+
+const searchData = [
+  {
+    url: 'https://www.facebook.com/',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+  {
+    url: 'https://google.com',
+    keywords: ['search', 'engine', 'find'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://instagram.com',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://india.gov.in',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://pib.gov.in',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://rajasthan.gov.in',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://x.com',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://rajshaladarpan.nic.in/sd3/Home/Public2/Default.aspx',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://sso.rajasthan.gov.in/signin',
+    keywords: ['insta', 'ig', 'instagram'],
+    imageUrl: 'https://search.com/logo.png'
+  },
+  {
+    url: 'https://sso.rajasthan.gov.in/signin',
+    keywords: ['rajasthan', 'government', 'portal', 'sso'],
+    imageUrl: 'https://example.com/logo_rajasthan.png'
+  },
+  {
+    url: 'https://www.india.gov.in',
+    keywords: ['india', 'government', 'portal', 'national'],
+    imageUrl: 'https://example.com/logo_india.png'
+  },
+  {
+    url: 'https://uidai.gov.in',
+    keywords: ['aadhaar', 'uidai', 'identity', 'india'],
+    imageUrl: 'https://example.com/logo_uidai.png'
+  },
+  {
+    url: 'https://incometaxindia.gov.in',
+    keywords: ['income tax', 'tax', 'india', 'government'],
+    imageUrl: 'https://example.com/logo_incometax.png'
+  },
+  {
+    url: 'https://www.irctc.co.in',
+    keywords: ['irctc', 'railways', 'india', 'tickets'],
+    imageUrl: 'https://example.com/logo_irctc.png'
+  },
+  {
+    url: 'https://www.epfindia.gov.in',
+    keywords: ['epf', 'pf', 'provident fund', 'employee'],
+    imageUrl: 'https://example.com/logo_epf.png'
+  },
+  {
+    url: 'https://www.digilocker.gov.in',
+    keywords: ['digilocker', 'documents', 'government', 'digital'],
+    imageUrl: 'https://example.com/logo_digilocker.png'
+  },
+  {
+    url: 'https://www.mygov.in',
+    keywords: ['mygov', 'india', 'government', 'community'],
+    imageUrl: 'https://example.com/logo_mygov.png'
+  },
+  {
+    url: 'https://parivahan.gov.in',
+    keywords: ['parivahan', 'transport', 'vehicle', 'license'],
+    imageUrl: 'https://example.com/logo_parivahan.png'
+  },
+  {
+    url: 'https://www.nvsp.in',
+    keywords: ['nvsp', 'voter', 'elections', 'india'],
+    imageUrl: 'https://example.com/logo_nvsp.png'
+  },
+  {
+    url: 'https://www.facebook.com',
+    keywords: ['facebook', 'social', 'media', 'fb'],
+    imageUrl: 'https://example.com/logo_facebook.png'
+  },
+  {
+    url: 'https://www.instagram.com',
+    keywords: ['instagram', 'photos', 'social', 'ig'],
+    imageUrl: 'https://example.com/logo_instagram.png'
+  },
+  {
+    url: 'https://www.twitter.com',
+    keywords: ['twitter', 'tweets', 'social', 'news'],
+    imageUrl: 'https://example.com/logo_twitter.png'
+  },
+  {
+    url: 'https://www.linkedin.com',
+    keywords: ['linkedin', 'jobs', 'networking', 'business'],
+    imageUrl: 'https://example.com/logo_linkedin.png'
+  },
+  {
+    url: 'https://www.snapchat.com',
+    keywords: ['snapchat', 'snaps', 'photos', 'social'],
+    imageUrl: 'https://example.com/logo_snapchat.png'
+  },
+  {
+    url: 'https://www.pinterest.com',
+    keywords: ['pinterest', 'ideas', 'photos', 'boards'],
+    imageUrl: 'https://example.com/logo_pinterest.png'
+  },
+  {
+    url: 'https://www.reddit.com',
+    keywords: ['reddit', 'community', 'news', 'discussion'],
+    imageUrl: 'https://example.com/logo_reddit.png'
+  },
+  {
+    url: 'https://www.tiktok.com',
+    keywords: ['tiktok', 'videos', 'social', 'shorts'],
+    imageUrl: 'https://example.com/logo_tiktok.png'
+  },
+  {
+    url: 'https://www.youtube.com',
+    keywords: ['youtube', 'videos', 'social', 'media'],
+    imageUrl: 'https://example.com/logo_youtube.png'
+  },
+  {
+    url: 'https://www.whatsapp.com',
+    keywords: ['whatsapp', 'chat', 'messaging', 'social'],
+    imageUrl: 'https://example.com/logo_whatsapp.png'
+  },
+  // Tech Companies
+{
+  url: 'https://www.google.com',
+  keywords: ['google', 'search', 'tech', 'cloud'],
+  imageUrl: 'https://example.com/logo_google.png'
+},
+{
+  url: 'https://www.microsoft.com',
+  keywords: ['microsoft', 'windows', 'office', 'cloud'],
+  imageUrl: 'https://example.com/logo_microsoft.png'
+},
+{
+  url: 'https://www.apple.com',
+  keywords: ['apple', 'ios', 'mac', 'tech'],
+  imageUrl: 'https://example.com/logo_apple.png'
+},
+{
+  url: 'https://www.amazon.com',
+  keywords: ['amazon', 'aws', 'shopping', 'tech'],
+  imageUrl: 'https://example.com/logo_amazon.png'
+},
+{
+  url: 'https://www.netflix.com',
+  keywords: ['netflix', 'streaming', 'movies', 'tv'],
+  imageUrl: 'https://example.com/logo_netflix.png'
+},
+{
+  url: 'https://www.spotify.com',
+  keywords: ['spotify', 'music', 'streaming', 'audio'],
+  imageUrl: 'https://example.com/logo_spotify.png'
+},
+
+// Food Delivery
+{
+  url: 'https://www.zomato.com',
+  keywords: ['zomato', 'food', 'delivery', 'restaurants'],
+  imageUrl: 'https://example.com/logo_zomato.png'
+},
+{
+  url: 'https://www.swiggy.com',
+  keywords: ['swiggy', 'food', 'delivery', 'restaurants'],
+  imageUrl: 'https://example.com/logo_swiggy.png'
+},
+{
+  url: 'https://www.ubereats.com',
+  keywords: ['ubereats', 'food', 'delivery', 'restaurants'],
+  imageUrl: 'https://example.com/logo_ubereats.png'
+},
+{
+  url: 'https://www.dominos.co.in',
+  keywords: ['dominos', 'pizza', 'delivery', 'food'],
+  imageUrl: 'https://example.com/logo_dominos.png'
+},
+
+// Shopping
+{
+  url: 'https://www.flipkart.com',
+  keywords: ['flipkart', 'shopping', 'ecommerce', 'india'],
+  imageUrl: 'https://example.com/logo_flipkart.png'
+},
+{
+  url: 'https://www.amazon.in',
+  keywords: ['amazon india', 'shopping', 'ecommerce', 'india'],
+  imageUrl: 'https://example.com/logo_amazon_in.png'
+},
+{
+  url: 'https://www.myntra.com',
+  keywords: ['myntra', 'fashion', 'shopping', 'clothes'],
+  imageUrl: 'https://example.com/logo_myntra.png'
+},
+{
+  url: 'https://www.snapdeal.com',
+  keywords: ['snapdeal', 'shopping', 'ecommerce', 'india'],
+  imageUrl: 'https://example.com/logo_snapdeal.png'
+},
+{
+  url: 'https://www.ajio.com',
+  keywords: ['ajio', 'fashion', 'shopping', 'india'],
+  imageUrl: 'https://example.com/logo_ajio.png'
+},
+
+// Rajasthan Government Services
+{
+  url: 'https://sso.rajasthan.gov.in/signin',
+  keywords: ['rajasthan sso', 'government', 'portal', 'signin'],
+  imageUrl: 'https://example.com/logo_sso_rajasthan.png'
+},
+{
+  url: 'https://rajshaladarpan.nic.in',
+  keywords: ['rajasthan', 'school', 'education', 'shala darpan'],
+  imageUrl: 'https://example.com/logo_rajshaladarpan.png'
+},
+{
+  url: 'https://energy.rajasthan.gov.in',
+  keywords: ['rajasthan energy', 'electricity', 'power', 'government'],
+  imageUrl: 'https://example.com/logo_rajasthan_energy.png'
+},
+{
+  url: 'https://transport.rajasthan.gov.in',
+  keywords: ['rajasthan', 'transport', 'vehicle', 'government'],
+  imageUrl: 'https://example.com/logo_rajasthan_transport.png'
+},
+{
+  url: 'https://urban.rajasthan.gov.in',
+  keywords: ['rajasthan', 'urban', 'development', 'municipal'],
+  imageUrl: 'https://example.com/logo_urban_rajasthan.png'
+},
+{
+  url: 'https://www.netflix.com',
+  keywords: ['netflix', 'streaming', 'movies', 'tv shows'],
+  imageUrl: 'https://example.com/logo_netflix.png'
+},
+{
+  url: 'https://www.amazonprimevideo.com',
+  keywords: ['amazon prime', 'video', 'streaming', 'movies'],
+  imageUrl: 'https://example.com/logo_amazon_prime.png'
+},
+{
+  url: 'https://www.hotstar.com',
+  keywords: ['hotstar', 'streaming', 'tv shows', 'movies'],
+  imageUrl: 'https://example.com/logo_hotstar.png'
+},
+{
+  url: 'https://www.zee5.com',
+  keywords: ['zee5', 'movies', 'tv shows', 'streaming'],
+  imageUrl: 'https://example.com/logo_zee5.png'
+},
+{
+  url: 'https://www.altbalaji.com',
+  keywords: ['alt balaji', 'web series', 'movies', 'streaming'],
+  imageUrl: 'https://example.com/logo_altbalaji.png'
+},
+{
+  url: 'https://www.mxplayer.in',
+  keywords: ['mx player', 'movies', 'tv shows', 'streaming'],
+  imageUrl: 'https://example.com/logo_mxplayer.png'
+},
+{
+  url: 'https://www.sonyliv.com',
+  keywords: ['sonyliv', 'streaming', 'tv shows', 'movies'],
+  imageUrl: 'https://example.com/logo_sonyliv.png'
+},
+{
+  url: 'https://www.apple.com/tv/',
+  keywords: ['apple tv', 'streaming', 'movies', 'tv shows'],
+  imageUrl: 'https://example.com/logo_apple_tv.png'
+},
+{
+  url: 'https://www.disneyplus.com',
+  keywords: ['disney+', 'streaming', 'movies', 'tv shows'],
+  imageUrl: 'https://example.com/logo_disneyplus.png'
+},
+{
+  url: 'https://www.paramountplus.com',
+  keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+  imageUrl: 'https://example.com/logo_paramountplus.png'
+},
+{
+url: 'https://www.jiocinema.com',
+  keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+  imageUrl: 'https://example.com/logo_paramountplus.png'
+},
+{
+  url: 'https://www.chess.com',
+    keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+    imageUrl: 'https://example.com/logo_paramountplus.png'
+  },
+  {
+    url: 'https://www.chatgpt.com',
+      keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+      imageUrl: 'https://example.com/logo_paramountplus.png'
     },
     {
-      name: "   Aqua Grandiosa Resort",
-      numberOfRooms: 80,
-      starRating: 3,
-      distanceFromBeach: "20km",
-      amenities: ["Mountain View", "Hiking Trails", "Free WiFi", "Free Breakfast", "Barbecue Area", "Free Parking"],
-      roomTypes: [
-        { type: "Standard Room", price: 120 },
-        { type: "Superior Room", price: 180 },
-        { type: "Cottage", price: 250 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Mountain+View+Retreat"
-    },
-    {
-      name: "Cityscape Inn",
-      numberOfRooms: 200,
-      starRating: 4,
-      distanceFromBeach: "10km",
-      amenities: ["Conference Room", "Free WiFi", "Rooftop Bar", "Gym", "Business Center", "Free Breakfast"],
-      roomTypes: [
-        { type: "Single Room", price: 100 },
-        { type: "Double Room", price: 150 },
-        { type: "Executive Suite", price: 300 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Cityscape+Inn"
-    },
-    {
-      name: "Sunset Villas",
-      numberOfRooms: 50,
-      starRating: 3,
-      distanceFromBeach: "300m",
-      amenities: ["Private Beach", "Swimming Pool", "Free Parking", "Restaurant", "Pet-Friendly"],
-      roomTypes: [
-        { type: "Standard Villa", price: 250 },
-        { type: "Luxury Villa", price: 400 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Sunset+Villas"
-    },
-    {
-      name: "Seaside Luxury Hotel",
-      numberOfRooms: 180,
-      starRating: 5,
-      distanceFromBeach: "50m",
-      amenities: ["Private Beach", "Infinity Pool", "Spa", "Gym", "Multiple Restaurants", "Free WiFi", "Valet Parking"],
-      roomTypes: [
-        { type: "Deluxe Room", price: 300 },
-        { type: "Ocean View Suite", price: 500 },
-        { type: "Presidential Suite", price: 1000 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Seaside+Luxury+Hotel"
-    },
-    {
-      name: "Lakeside Lodge",
-      numberOfRooms: 60,
-      starRating: 4,
-      distanceFromBeach: "15km",
-      amenities: ["Lake View", "Fishing", "Hiking", "Free Parking", "Free Breakfast", "WiFi", "Spa"],
-      roomTypes: [
-        { type: "Cottage", price: 180 },
-        { type: "Lodge Suite", price: 250 },
-        { type: "Family Room", price: 300 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Lakeside+Lodge"
-    },
-    {
-      name: "Urban Escape Hotel",
-      numberOfRooms: 120,
-      starRating: 4,
-      distanceFromBeach: "12km",
-      amenities: ["Rooftop Pool", "Free WiFi", "Gym", "Conference Rooms", "Business Center", "Free Parking"],
-      roomTypes: [
-        { type: "Standard Room", price: 140 },
-        { type: "Deluxe Room", price: 220 },
-        { type: "Executive Suite", price: 400 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Urban+Escape+Hotel"
-    },
-    {
-      name: "Tropical Paradise Resort",
-      numberOfRooms: 220,
-      starRating: 5,
-      distanceFromBeach: "20m",
-      amenities: ["Private Beach", "Water Sports", "Swimming Pool", "Gym", "Spa", "Multiple Restaurants", "Free WiFi", "Free Breakfast"],
-      roomTypes: [
-        { type: "Tropical Room", price: 280 },
-        { type: "Oceanfront Suite", price: 450 },
-        { type: "Private Villa", price: 700 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Tropical+Paradise+Resort"
-    },
-    {
-      name: "City Comfort Hotel",
-      numberOfRooms: 100,
-      starRating: 3,
-      distanceFromBeach: "8km",
-      amenities: ["Free WiFi", "Gym", "Free Parking", "Restaurant", "Bar"],
-      roomTypes: [
-        { type: "Single Room", price: 90 },
-        { type: "Double Room", price: 140 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=City+Comfort+Hotel"
-    },
-    {
-      name: "Royal Garden Resort",
-      numberOfRooms: 250,
-      starRating: 5,
-      distanceFromBeach: "500m",
-      amenities: ["Private Beach", "Golf Course", "Spa", "Swimming Pool", "Gym", "Tennis Courts", "Multiple Restaurants", "Free WiFi"],
-      roomTypes: [
-        { type: "Garden View Room", price: 250 },
-        { type: "Royal Suite", price: 600 },
-        { type: "Presidential Villa", price: 1200 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Royal+Garden+Resort"
-    },
-    {
-      name: "Beachside Bungalow Hotel",
-      numberOfRooms: 40,
-      starRating: 4,
-      distanceFromBeach: "50m",
-      amenities: ["Private Bungalows", "Free Parking", "Swimming Pool", "Restaurant", "Free WiFi", "Pet-Friendly"],
-      roomTypes: [
-        { type: "Bungalow", price: 180 },
-        { type: "Luxury Bungalow", price: 350 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Beachside+Bungalow+Hotel"
-    },
-    {
-      name: "Grand Palace Hotel",
-      numberOfRooms: 300,
-      starRating: 5,
-      distanceFromBeach: "2km",
-      amenities: ["Casino", "Luxury Spa", "Indoor Pool", "Gym", "Multiple Restaurants", "Business Center", "Free WiFi"],
-      roomTypes: [
-        { type: "Standard Room", price: 200 },
-        { type: "Luxury Suite", price: 450 },
-        { type: "Penthouse", price: 900 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Grand+Palace+Hotel"
-    },
-    {
-      name: "Harborview Inn",
-      numberOfRooms: 75,
-      starRating: 4,
-      distanceFromBeach: "150m",
-      amenities: ["Harbor View", "Free Breakfast", "Free Parking", "WiFi", "Restaurant"],
-      roomTypes: [
-        { type: "Single Room", price: 110 },
-        { type: "Double Room", price: 160 },
-        { type: "Suite", price: 280 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Harborview+Inn"
-    },
-    {
-      name: "Coastal Comfort Suites",
-      numberOfRooms: 90,
-      starRating: 3,
-      distanceFromBeach: "1km",
-      amenities: ["Free WiFi", "Free Parking", "Swimming Pool", "Restaurant", "Family Friendly"],
-      roomTypes: [
-        { type: "Standard Suite", price: 150 },
-        { type: "Family Suite", price: 200 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Coastal+Comfort+Suites"
-    },
-    {
-      name: "Island Getaway Resort",
-      numberOfRooms: 200,
-      starRating: 5,
-      distanceFromBeach: "5m",
-      amenities: ["Private Island", "Water Sports", "Spa", "Gym", "Multiple Restaurants", "Free Breakfast", "Free WiFi"],
-      roomTypes: [
-        { type: "Island View Room", price: 400 },
-        { type: "Beachfront Suite", price: 600 },
-        { type: "Overwater Bungalow", price: 1200 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Island+Getaway+Resort"
-    },
-    {
-      name: "Serene Sands Hotel",
-      numberOfRooms: 80,
-      starRating: 4,
-      distanceFromBeach: "250m",
-      amenities: ["Beach Access", "Free WiFi", "Gym", "Restaurant", "Bar", "Spa"],
-      roomTypes: [
-        { type: "Standard Room", price: 130 },
-        { type: "Deluxe Room", price: 220 },
-        { type: "Suite", price: 350 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Serene+Sands+Hotel"
-    },
-    {
-      name: "Blue Horizon Hotel",
-      numberOfRooms: 180,
-      starRating: 4,
-      distanceFromBeach: "200m",
-      amenities: ["Free WiFi", "Rooftop Pool", "Gym", "Restaurant", "Free Parking"],
-      roomTypes: [
-        { type: "Standard Room", price: 160 },
-        { type: "Deluxe Room", price: 240 },
-        { type: "Penthouse Suite", price: 600 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Blue+Horizon+Hotel"
-    },
-    {
-      name: "Emerald Bay Resort",
-      numberOfRooms: 240,
-      starRating: 5,
-      distanceFromBeach: "10m",
-      amenities: ["Private Beach", "Luxury Spa", "Gym", "Multiple Restaurants", "Free Breakfast", "Free WiFi"],
-      roomTypes: [
-        { type: "Garden View Room", price: 300 },
-        { type: "Beachfront Suite", price: 550 },
-        { type: "Presidential Villa", price: 1200 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Emerald+Bay+Resort"
-    },
-    {
-      name: "Golden Sands Resort",
-      numberOfRooms: 300,
-      starRating: 5,
-      distanceFromBeach: "50m",
-      amenities: ["Private Beach", "Water Park", "Gym", "Multiple Restaurants", "Free WiFi", "Free Breakfast"],
-      roomTypes: [
-        { type: "Standard Room", price: 250 },
-        { type: "Luxury Suite", price: 600 },
-        { type: "Family Room", price: 450 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Golden+Sands+Resort"
-    },
-    {
-      name: "Paradise Cove Hotel",
-      numberOfRooms: 210,
-      starRating: 5,
-      distanceFromBeach: "100m",
-      amenities: ["Private Beach", "Infinity Pool", "Gym", "Spa", "Free WiFi", "Multiple Restaurants", "Free Breakfast"],
-      roomTypes: [
-        { type: "Oceanfront Room", price: 300 },
-        { type: "Luxury Suite", price: 500 },
-        { type: "Presidential Suite", price: 1100 }
-      ],
-      image: "https://via.placeholder.com/400x300?text=Paradise+Cove+Hotel"
-    }
-  ];
+      url: 'https://www.openai.com',
+        keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+        imageUrl: 'https://example.com/logo_paramountplus.png'
+      },
+      {
+        url: 'https://www.tataplay.com',
+          keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+          imageUrl: 'https://example.com/logo_paramountplus.png'
+        },
+        {
+          url: 'https://www.tataplaybinge.com',
+            keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+            imageUrl: 'https://example.com/logo_paramountplus.png'
+          },
+          {
+            url: 'https://www.sony.com',
+              keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+              imageUrl: 'https://example.com/logo_paramountplus.png'
+            },
+            {
+              url: 'https://www.hp.com',
+                keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                imageUrl: 'https://example.com/logo_paramountplus.png'
+              },
+              {
+                url: 'https://www.cloud.google.com',
+                  keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                  imageUrl: 'https://example.com/logo_paramountplus.png'
+                },
+                {
+                  url: 'https://www.gemini.google.com',
+                    keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                    imageUrl: 'https://example.com/logo_paramountplus.png'
+                  },
+                  {
+                    url: 'https://www.meet.google.com',
+                      keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                      imageUrl: 'https://example.com/logo_paramountplus.png'
+                    },
+                    {
+                      url: 'https://www.gmail.google.com',
+                        keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                        imageUrl: 'https://example.com/logo_paramountplus.png'
+                      },
+                      {
+                        url: 'https://www.vivo.com',
+                          keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                          imageUrl: 'https://example.com/logo_paramountplus.png'
+                        },
+                        {
+                          url: 'https://www.oppo.com',
+                            keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                            imageUrl: 'https://example.com/logo_paramountplus.png'
+                          },
+                          {
+                            url: 'https://www.META.com',
+                              keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                              imageUrl: 'https://example.com/logo_paramountplus.png'
+                            },
+                            {
+                              url: 'https://www.dell.com',
+                                keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                                imageUrl: 'https://example.com/logo_paramountplus.png'
+                              },
+                              {
+                                url: 'https://www.abc.xyz',
+                                  keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
+                                  imageUrl: 'https://example.com/logo_paramountplus.png'
+                                },
+      
+    
   
-  export default hotels;
+
+
+
+
+
   
+];
+
+// Search functionality
+function search(query) {
+  const resultsContainer = document.getElementById('resultsContainer');
+  const results = searchData.filter(item => 
+    item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query))
+  );
+  displayResults(results, resultsContainer);
+}
+
+// Function to display results
+function displayResults(results, container) {
+  container.innerHTML = ''; // Clear previous results
+
+  if (results.length === 0) {
+    container.innerHTML = '<p>No results found for your query.</p>';
+    return;
+  }
+
+  results.forEach(item => {
+    container.innerHTML += `
+      <div class="result-card">
+        <div class="result-header">
+          <img src="${item.imageUrl}" alt="${item.keywords.join(', ')}" class="result-icon">
+          <a href="${item.url}" target="_blank" class="result-title">${item.url}</a>
+        </div>
+        <div class="result-description">
+          <p>${item.description}</p>
+          <p><strong>Keywords:</strong> ${item.keywords.join(', ')}</p>
+          <a href="${item.url}" target="_blank" class="result-link">Visit Page<
+        </div>
+      </div>
+    `;
+  });
+}
