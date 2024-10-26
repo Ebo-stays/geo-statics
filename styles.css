@@ -1,0 +1,143 @@
+/* styles.css */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+    padding: 40px;
+    text-align: center;
+    background-color: var(--theme-color, #f0f0f0);
+  }
+  
+  .search-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+  
+  .logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: #210045;
+  }
+  
+  #search-box {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s;
+  }
+  
+  #search-box:focus {
+    border-color: #6a00dc;
+    box-shadow: 0 0 8px rgba(106, 0, 220, 0.4);
+  }
+  
+  .icons {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+  }
+  
+  .icon {
+    font-size: 24px;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .icon:hover {
+    color: #6a00dc;
+  }
+  
+  #search-btn {
+    background-color: #210045;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  #search-btn:hover {
+    background-color: #6a00dc;
+  }
+  
+  #embed-container {
+    margin-top: 30px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .ai-chat {
+    margin-top: 30px;
+  }
+  
+  #ai-output {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    height: 100px;
+    overflow-y: scroll;
+  }
+  
+  #ai-input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  #ai-btn {
+    padding: 10px 20px;
+    background-color: #210045;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #ai-btn:hover {
+    background-color: #6a00dc;
+  }
+  
+  #history-container {
+    margin-top: 40px;
+  }
+  
+  #history-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #history-list li {
+    background-color: #e4e4e4;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+  }
+  
+  .settings-link, .back-link {
+    margin-top: 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    color: #210045;
+    font-weight: bold;
+  }
+  
+  .settings-link:hover, .back-link:hover {
+    color: #e40093;
+  }
+  
