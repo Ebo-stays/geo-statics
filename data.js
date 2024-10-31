@@ -678,6 +678,56 @@ url: 'https://www.jiocinema.com',
                               keywords: ['competitive exams', 'k-12 education', 'video lectures', 'personalized learning'],
                               imageUrl: 'https://example.com/logo_unacademy.png'
                           },
+   {
+        url: 'https://www.spotify.com/',
+        keywords: ['music streaming', 'playlists', 'podcasts', 'discovery'],
+        imageUrl: 'https://example.com/logo_spotify.png'
+    },
+    {
+        url: 'https://www.apple.com/apple-music/',
+        keywords: ['music streaming', 'exclusive content', 'curated playlists', 'lossless audio'],
+        imageUrl: 'https://example.com/logo_applemusic.png'
+    },
+    {
+        url: 'https://music.amazon.com/',
+        keywords: ['music streaming', 'ad-free', 'high quality audio', 'podcasts'],
+        imageUrl: 'https://example.com/logo_amazonmusic.png'
+    },
+    {
+        url: 'https://www.soundcloud.com/',
+        keywords: ['independent artists', 'music streaming', 'user-uploaded content', 'playlists'],
+        imageUrl: 'https://example.com/logo_soundcloud.png'
+    },
+    {
+        url: 'https://www.youtube.com/music/',
+        keywords: ['music streaming', 'video music', 'playlists', 'ad-free option'],
+        imageUrl: 'https://example.com/logo_youtubemusic.png'
+    },
+    {
+        url: 'https://music.gaana.com/',
+        keywords: ['Indian music', 'regional playlists', 'music streaming', 'radio'],
+        imageUrl: 'https://example.com/logo_gaana.png'
+    },
+    {
+        url: 'https://www.jiosaavn.com/',
+        keywords: ['Indian music', 'Bollywood songs', 'regional languages', 'podcasts'],
+        imageUrl: 'https://example.com/logo_jiosaavn.png'
+    },
+    {
+        url: 'https://www.pandora.com/',
+        keywords: ['radio streaming', 'music discovery', 'customized stations', 'ad-free option'],
+        imageUrl: 'https://example.com/logo_pandora.png'
+    },
+    {
+        url: 'https://www.deezer.com/',
+        keywords: ['music streaming', 'podcasts', 'playlists', 'lyrics'],
+        imageUrl: 'https://example.com/logo_deezer.png'
+    },
+    {
+        url: 'https://www.wynk.in/music',
+        keywords: ['Indian music', 'Bollywood hits', 'regional songs', 'music streaming'],
+        imageUrl: 'https://example.com/logo_wynk.png'
+    },
                             
                               
                                 
