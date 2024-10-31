@@ -1,1 +1,97 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Global search- bloops</title><link href="https://play-lh.googleusercontent.com/zRAFL6rV-uvijZqJOW0FUt4Zvdo9kF5SS_rzCadc1-nOJogJ6AQiy1Kswr8arD8CKmE=w240-h480-rw" rel="icon" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="https://ebo-stays.github.io/geo-statics/styles.css"></head><body><div class="container"><div class="search-bar"><input type="text" placeholder="Search again..." class="search-input" id="searchQuery"><button class="search-button" onclick="search(document.getElementById('searchQuery').value)"><img src="https://play-lh.googleusercontent.com/zRAFL6rV-uvijZqJOW0FUt4Zvdo9kF5SS_rzCadc1-nOJogJ6AQiy1Kswr8arD8CKmE=w240-h480-rw" alt="Search"></button></div><div class="results" id="resultsContainer"></div></div><script src="https://ebo-stays.github.io/geo-statics/data.js"></script><script>document.getElementById('searchQuery').addEventListener('keydown', function(e) { if (e.key === 'Enter') { search(this.value); }}); function search(query) { const resultsContainer = document.getElementById('resultsContainer'); const results = searchData.filter(item => item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query))); displayResults(results, resultsContainer); } function displayResults(results, container) { container.innerHTML = ''; if (results.length === 0) { container.innerHTML = '<p>No results found.</p>'; return; } results.forEach(item => { container.innerHTML += `<div class="result-card"><div class="result-header"><img src="${item.imageUrl}" alt="${item.keywords.join(', ')}" class="result-icon"><a href="${item.url}" target="_blank" class="result-title">${item.url}</a></div><div class="result-description"><p>Keywords: ${item.keywords.join(', ')}</p><a href="${item.url}" target="_blank" class="result-link">Visit Page</a></div></div>`; }); }</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Search - Gemini Style</title>
+    <link href="https://example.com/icon.png" rel="icon" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="greeting">नमस्ते, Vinayak</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search again..." class="search-input" id="searchQuery">
+            <button class="search-button" onclick="search(document.getElementById('searchQuery').value)">
+                <img src="https://example.com/search-icon.png" alt="Search">
+            </button>
+            <button class="mic-button" onclick="activateMicrophone()">
+                <img src="https://example.com/mic-icon.png" alt="Microphone">
+            </button>
+        </div>
+        <div class="results" id="resultsContainer"></div>
+        <button class="history-button" onclick="toggleHistory()">🕒 History</button>
+        <div class="history-overlay" id="historyOverlay">
+            <h2>Search History</h2>
+            <ul id="historyList"></ul>
+            <button onclick="toggleHistory()">Close</button>
+        </div>
+    </div>
+
+    <script src="https://ebo-stays.github.io/geo-statics/data.js"></script>
+    <script>
+        let searchHistory = [];
+
+        document.getElementById('searchQuery').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                search(this.value);
+            }
+        });
+
+        function search(query) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const results = searchData.filter(item => item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query)));
+            displayResults(results, resultsContainer);
+
+            if (query) {
+                searchHistory.push(query);
+                localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            }
+        }
+
+        function displayResults(results, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+            results.forEach(item => {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'result-card';
+                resultCard.innerHTML = `
+                    <div class="result-title">${item.url}</div>
+                    <div class="result-description">Keywords: ${item.keywords.join(', ')}</div>
+                `;
+                resultCard.onclick = () => {
+                    window.location.href = item.url; // Open the URL in the same tab
+                };
+                container.appendChild(resultCard);
+            });
+        }
+
+        function toggleHistory() {
+            const historyOverlay = document.getElementById('historyOverlay');
+            historyOverlay.style.display = historyOverlay.style.display === 'block' ? 'none' : 'block';
+            if (historyOverlay.style.display === 'block') {
+                loadHistory();
+            }
+        }
+
+        function loadHistory() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            const savedHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+            savedHistory.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                historyList.appendChild(li);
+            });
+        }
+
+        function activateMicrophone() {
+            // Implement microphone functionality here
+            alert('Microphone activated!'); // Placeholder action
+        }
+    </script>
+</body>
+</html>
