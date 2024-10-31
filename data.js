@@ -388,6 +388,302 @@ url: 'https://www.jiocinema.com',
                                   keywords: ['paramount+', 'streaming', 'movies', 'tv shows'],
                                   imageUrl: 'https://example.com/logo_paramountplus.png'
                                 },
+                                {
+                                  url: 'https://www.booking.com',
+                                  keywords: ['holiday', 'travel', 'hotels', 'flights', 'vacation'],
+                                  imageUrl: 'https://example.com/logo_booking.png'
+                                },
+                                {
+                                  url: 'https://www.airbnb.com',
+                                  keywords: ['holiday rentals', 'home stays', 'vacation', 'getaway', 'apartments'],
+                                  imageUrl: 'https://example.com/logo_airbnb.png'
+                                },
+                                {
+                                  url: 'https://www.expedia.com',
+                                  keywords: ['vacation packages', 'flights', 'hotels', 'travel deals', 'cruises'],
+                                  imageUrl: 'https://example.com/logo_expedia.png'
+                                },
+                                {
+                                  url: 'https://www.kayak.com',
+                                  keywords: ['cheap flights', 'car rentals', 'vacation', 'holiday deals', 'cruises'],
+                                  imageUrl: 'https://example.com/logo_kayak.png'
+                                },
+                                {
+                                  url: 'https://www.travelocity.com',
+                                  keywords: ['vacation packages', 'hotels', 'flights', 'travel', 'car rentals'],
+                                  imageUrl: 'https://example.com/logo_travelocity.png'
+                                },
+                                {
+                                  url: 'https://www.unrealengine.com',
+                                  keywords: ['game development', '3D games', 'Unreal Engine', 'gaming', 'VR'],
+                                  imageUrl: 'https://example.com/logo_unrealengine.png'
+                                },
+                                {
+                                  url: 'https://www.unity.com',
+                                  keywords: ['game development', 'Unity', '2D games', '3D games', 'VR/AR'],
+                                  imageUrl: 'https://example.com/logo_unity.png'
+                                },
+                                {
+                                  url: 'https://developer.mozilla.org',
+                                  keywords: ['HTML', 'CSS', 'JavaScript', 'Web development', 'tutorials'],
+                                  imageUrl: 'https://example.com/logo_mdn.png'
+                                },
+                                {
+                                  url: 'https://www.codecademy.com',
+                                  keywords: ['HTML', 'CSS', 'JavaScript', 'web development', 'learning'],
+                                  imageUrl: 'https://example.com/logo_codecademy.png'
+                                },
+                                {
+                                  url: 'https://www.w3schools.com',
+                                  keywords: ['HTML', 'CSS', 'JavaScript', 'web development', 'tutorials'],
+                                  imageUrl: 'https://example.com/logo_w3schools.png'
+                                },
+                                {
+                                  url: 'https://www.khanacademy.org',
+                                  keywords: ['coding', 'JavaScript', 'learning', 'web development', 'HTML/CSS'],
+                                  imageUrl: 'https://example.com/logo_khanacademy.png'
+                                },
+                                {
+                                  url: 'https://www.stackoverflow.com',
+                                  keywords: ['coding', 'HTML', 'CSS', 'JavaScript', 'programming help'],
+                                  imageUrl: 'https://example.com/logo_stackoverflow.png'
+                                },
+                                {
+                                  url: 'https://www.freecodecamp.org',
+                                  keywords: ['HTML', 'CSS', 'JavaScript', 'web development', 'learning'],
+                                  imageUrl: 'https://example.com/logo_freecodecamp.png'
+                                },
+                                {
+                                  url: 'https://www.github.com',
+                                  keywords: ['coding', 'version control', 'collaboration', 'open source', 'repositories'],
+                                  imageUrl: 'https://example.com/logo_github.png'
+                                },
+                                {
+                                  url: 'https://www.codepen.io',
+                                  keywords: ['HTML', 'CSS', 'JavaScript', 'frontend', 'sandbox'],
+                                  imageUrl: 'https://example.com/logo_codepen.png'
+                                },
+                                {
+                                  url: 'https://www.techcrunch.com',
+                                  keywords: ['technology news', 'startups', 'apps', 'gadgets', 'innovation'],
+                                  imageUrl: 'https://example.com/logo_techcrunch.png'
+                                },
+                                {
+                                  url: 'https://www.theverge.com',
+                                  keywords: ['tech news', 'gadgets', 'reviews', 'science', 'innovation'],
+                                  imageUrl: 'https://example.com/logo_theverge.png'
+                                },
+                                {
+                                  url: 'https://www.wired.com',
+                                  keywords: ['tech news', 'science', 'business', 'security', 'future'],
+                                  imageUrl: 'https://example.com/logo_wired.png'
+                                },
+                                {
+                                  url: 'https://www.hackernews.com',
+                                  keywords: ['programming', 'startups', 'technology', 'coding news', 'developer'],
+                                  imageUrl: 'https://example.com/logo_hackernews.png'
+                                },
+                                {
+                                  url: 'https://www.dev.to',
+                                  keywords: ['developer news', 'programming', 'HTML', 'CSS', 'JavaScript', 'web development'],
+                                  imageUrl: 'https://example.com/logo_devto.png'
+                                },
+                                {
+                                  url: 'https://www.cnet.com',
+                                  keywords: ['tech news', 'gadgets', 'consumer electronics', 'reviews', 'trends'],
+                                  imageUrl: 'https://example.com/logo_cnet.png'
+                                },
+                                {
+                                  url: 'https://www.producthunt.com',
+                                  keywords: ['new apps', 'startups', 'innovation', 'developer tools', 'tech news'],
+                                  imageUrl: 'https://example.com/logo_producthunt.png'
+                                },
+                                {
+                                  url: 'https://www.reddit.com/r/programming',
+                                  keywords: ['coding', 'developer news', 'tech discussions', 'open source', 'programming'],
+                                  imageUrl: 'https://example.com/logo_redditprogramming.png'
+                                },
+                                {
+                                  url: 'https://www.infoworld.com',
+                                  keywords: ['enterprise tech', 'cloud computing', 'software development', 'AI', 'data'],
+                                  imageUrl: 'https://example.com/logo_infoworld.png'
+                                },
+                                {
+                                  url: 'https://www.arstechnica.com',
+                                  keywords: ['technology news', 'science', 'gadgets', 'business', 'IT news'],
+                                  imageUrl: 'https://example.com/logo_arstechnica.png'
+                                },
+                                {
+                                  url: 'https://www.nytimes.com',
+                                  keywords: ['news', 'world', 'politics', 'business', 'opinion', 'arts'],
+                                  imageUrl: 'https://example.com/logo_nytimes.png'
+                                },
+                                {
+                                  url: 'https://www.washingtonpost.com',
+                                  keywords: ['news', 'politics', 'world', 'opinion', 'business', 'technology'],
+                                  imageUrl: 'https://example.com/logo_washingtonpost.png'
+                                },
+                                {
+                                  url: 'https://www.bbc.com/news',
+                                  keywords: ['world news', 'UK', 'politics', 'business', 'health', 'technology'],
+                                  imageUrl: 'https://example.com/logo_bbc.png'
+                                },
+                                {
+                                  url: 'https://www.cnn.com',
+                                  keywords: ['breaking news', 'US news', 'politics', 'health', 'world', 'entertainment'],
+                                  imageUrl: 'https://example.com/logo_cnn.png'
+                                },
+                                {
+                                  url: 'https://www.aljazeera.com',
+                                  keywords: ['international news', 'Middle East', 'politics', 'environment', 'technology'],
+                                  imageUrl: 'https://example.com/logo_aljazeera.png'
+                                },
+                                {
+                                  url: 'https://www.reuters.com',
+                                  keywords: ['breaking news', 'business', 'markets', 'technology', 'world news'],
+                                  imageUrl: 'https://example.com/logo_reuters.png'
+                                },
+                                {
+                                  url: 'https://www.forbes.com',
+                                  keywords: ['business news', 'finance', 'entrepreneurship', 'tech', 'innovation'],
+                                  imageUrl: 'https://example.com/logo_forbes.png'
+                                },
+                                {
+                                  url: 'https://www.bloomberg.com',
+                                  keywords: ['finance', 'business news', 'markets', 'technology', 'economy'],
+                                  imageUrl: 'https://example.com/logo_bloomberg.png'
+                                },
+                                {
+                                  url: 'https://www.theguardian.com',
+                                  keywords: ['news', 'world', 'politics', 'opinion', 'culture', 'technology'],
+                                  imageUrl: 'https://example.com/logo_theguardian.png'
+                                },
+                                {
+                                  url: 'https://www.nbcnews.com',
+                                  keywords: ['US news', 'world news', 'politics', 'business', 'tech', 'health'],
+                                  imageUrl: 'https://example.com/logo_nbcnews.png'
+                                },
+                                {
+                                  url: 'https://www.thehindu.com',
+                                  keywords: ['The Hindu', 'India', 'news', 'newspaper'],
+                                  imageUrl: 'https://example.com/logo_thehindu.png'
+                              },
+                              {
+                                  url: 'https://timesofindia.indiatimes.com',
+                                  keywords: ['Times of India', 'TOI', 'India', 'news'],
+                                  imageUrl: 'https://example.com/logo_toi.png'
+                              },
+                              {
+                                  url: 'https://www.indiatoday.in',
+                                  keywords: ['India Today', 'news', 'politics', 'entertainment'],
+                                  imageUrl: 'https://example.com/logo_indiatoday.png'
+                              },
+                              {
+                                  url: 'https://www.news18.com',
+                                  keywords: ['News18', 'India', 'breaking news', 'entertainment'],
+                                  imageUrl: 'https://example.com/logo_news18.png'
+                              },
+                              {
+                                  url: 'https://www.ndtv.com',
+                                  keywords: ['NDTV', 'India', 'world news', 'live'],
+                                  imageUrl: 'https://example.com/logo_ndtv.png'
+                              },
+                              {
+                                  url: 'https://www.dnaindia.com',
+                                  keywords: ['DNA', 'India', 'regional news', 'entertainment'],
+                                  imageUrl: 'https://example.com/logo_dnaindia.png'
+                              },
+                              {
+                                  url: 'https://www.firstpost.com',
+                                  keywords: ['Firstpost', 'India', 'analysis', 'news'],
+                                  imageUrl: 'https://example.com/logo_firstpost.png'
+                              },
+                              {
+                                  url: 'https://www.deccanchronicle.com',
+                                  keywords: ['Deccan Chronicle', 'South India', 'news', 'media'],
+                                  imageUrl: 'https://example.com/logo_deccanchronicle.png'
+                              },
+                              {
+                                  url: 'https://www.business-standard.com',
+                                  keywords: ['Business Standard', 'finance', 'markets', 'India'],
+                                  imageUrl: 'https://example.com/logo_businessstandard.png'
+                              },
+                              {
+                                url: 'https://www.aajtak.in',
+                                keywords: ['Aaj Tak', 'India', 'news channel', 'breaking news'],
+                                imageUrl: 'https://example.com/logo_aajtak.png'
+                            },
+                            {
+                                url: 'https://www.indiatvnews.com',
+                                keywords: ['India TV', 'news', 'live news', 'India'],
+                                imageUrl: 'https://example.com/logo_indiatv.png'
+                            },
+                            {
+                                url: 'https://www.cnnnews18.com',
+                                keywords: ['CNN-News18', 'India', 'international news', 'breaking'],
+                                imageUrl: 'https://example.com/logo_cnnnews18.png'
+                            },
+                            {
+                                url: 'https://www.republicworld.com',
+                                keywords: ['Republic TV', 'news', 'India', 'live updates'],
+                                imageUrl: 'https://example.com/logo_republictv.png'
+                            },
+                            {
+                                url: 'https://www.abplive.com',
+                                keywords: ['ABP News', 'India', 'politics', 'live news'],
+                                imageUrl: 'https://example.com/logo_abpnews.png'
+                            },
+                            {
+                                url: 'https://www.timesnownews.com',
+                                keywords: ['Times Now', 'news channel', 'India', 'business news'],
+                                imageUrl: 'https://example.com/logo_timesnow.png'
+                            },
+                            {
+                                url: 'https://www.zee5.com/news',
+                                keywords: ['Zee News', 'breaking news', 'India', 'regional news'],
+                                imageUrl: 'https://example.com/logo_zeenews.png'
+                            },
+                            {
+                                url: 'https://www.etvbharat.com',
+                                keywords: ['ETV Bharat', 'regional news', 'India', 'live news'],
+                                imageUrl: 'https://example.com/logo_etvbharat.png'
+                            },
+                            {
+                                url: 'https://www.ndtv.com',
+                                keywords: ['NDTV India', 'news channel', 'India', 'live streaming'],
+                                imageUrl: 'https://example.com/logo_ndtv.png'
+                            },
+                            {
+                              url: 'https://www.byjus.com/',
+                              keywords: ['education', 'k-12', 'exam prep', 'interactive learning'],
+                              imageUrl: 'https://example.com/logo_byjus.png'
+                          },
+                          {
+                              url: 'https://www.vedantu.com/',
+                              keywords: ['live classes', 'competitive exams', 'school subjects', 'interactive learning'],
+                              imageUrl: 'https://example.com/logo_vedantu.png'
+                          },
+                          {
+                              url: 'https://www.whitehatjr.com/',
+                              keywords: ['coding', 'kids learning', 'app development', 'programming basics'],
+                              imageUrl: 'https://example.com/logo_whitehatjr.png'
+                          },
+                          {
+                              url: 'https://www.khanacademy.org/',
+                              keywords: ['free courses', 'online education', 'interactive learning', 'video lessons'],
+                              imageUrl: 'https://example.com/logo_khanacademy.png'
+                          },
+                          {
+                              url: 'https://unacademy.com/',
+                              keywords: ['competitive exams', 'k-12 education', 'video lectures', 'personalized learning'],
+                              imageUrl: 'https://example.com/logo_unacademy.png'
+                          },
+                            
+                              
+                                
+                                
+                                
+                                
       
     
   
