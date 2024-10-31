@@ -728,6 +728,231 @@ url: 'https://www.jiocinema.com',
         keywords: ['Indian music', 'Bollywood hits', 'regional songs', 'music streaming'],
         imageUrl: 'https://example.com/logo_wynk.png'
     },
+  {
+        url: 'https://www.godaddy.com/',
+        keywords: ['domain registration', 'website builder', 'hosting', 'SSL certificates'],
+        imageUrl: 'https://example.com/logo_godaddy.png'
+    },
+    {
+        url: 'https://www.squarespace.com/',
+        keywords: ['website builder', 'e-commerce', 'templates', 'hosting'],
+        imageUrl: 'https://example.com/logo_squarespace.png'
+    },
+    {
+        url: 'https://www.wix.com/',
+        keywords: ['website builder', 'drag and drop', 'customizable templates', 'e-commerce'],
+        imageUrl: 'https://example.com/logo_wix.png'
+    },
+    {
+        url: 'https://www.weebly.com/',
+        keywords: ['website builder', 'e-commerce', 'SEO', 'hosting'],
+        imageUrl: 'https://example.com/logo_weebly.png'
+    },
+    {
+        url: 'https://www.shopify.com/',
+        keywords: ['e-commerce', 'website builder', 'online store', 'hosting'],
+        imageUrl: 'https://example.com/logo_shopify.png'
+    },
+
+    // Google Services
+    {
+        url: 'https://www.google.com/',
+        keywords: ['search engine', 'Gmail', 'Drive', 'Maps'],
+        imageUrl: 'https://example.com/logo_google.png'
+    },
+    {
+        url: 'https://mail.google.com/',
+        keywords: ['email', 'Gmail', 'Google Account', 'free storage'],
+        imageUrl: 'https://example.com/logo_gmail.png'
+    },
+    {
+        url: 'https://drive.google.com/',
+        keywords: ['cloud storage', 'file sharing', 'backup', 'collaboration'],
+        imageUrl: 'https://example.com/logo_googledrive.png'
+    },
+    {
+        url: 'https://photos.google.com/',
+        keywords: ['photo storage', 'backup', 'cloud', 'sharing'],
+        imageUrl: 'https://example.com/logo_googlephotos.png'
+    },
+
+    // Apple Services
+    {
+        url: 'https://www.apple.com/',
+        keywords: ['products', 'services', 'iPhone', 'Mac'],
+        imageUrl: 'https://example.com/logo_apple.png'
+    },
+    {
+        url: 'https://www.icloud.com/',
+        keywords: ['cloud storage', 'backup', 'file sharing', 'Apple'],
+        imageUrl: 'https://example.com/logo_icloud.png'
+    },
+    {
+        url: 'https://music.apple.com/',
+        keywords: ['music streaming', 'playlists', 'high-quality audio', 'podcasts'],
+        imageUrl: 'https://example.com/logo_applemusic.png'
+    },
+    {
+        url: 'https://tv.apple.com/',
+        keywords: ['video streaming', 'original series', 'movies', 'Apple TV+'],
+        imageUrl: 'https://example.com/logo_appletv.png'
+    },
+
+    // Amazon Services
+    {
+        url: 'https://www.amazon.com/',
+        keywords: ['shopping', 'e-commerce', 'Prime', 'delivery'],
+        imageUrl: 'https://example.com/logo_amazon.png'
+    },
+    {
+        url: 'https://www.primevideo.com/',
+        keywords: ['video streaming', 'original series', 'movies', 'Amazon Prime Video'],
+        imageUrl: 'https://example.com/logo_primevideo.png'
+    },
+    {
+        url: 'https://music.amazon.com/',
+        keywords: ['music streaming', 'ad-free', 'high-quality audio', 'playlists'],
+        imageUrl: 'https://example.com/logo_amazonmusic.png'
+    },
+    {
+        url: 'https://aws.amazon.com/',
+        keywords: ['cloud computing', 'AWS', 'hosting', 'services'],
+        imageUrl: 'https://example.com/logo_aws.png'
+    },
+  {
+        url: 'https://www.webflow.com/',
+        keywords: ['website builder', 'no-code', 'responsive design', 'CMS'],
+        imageUrl: 'https://example.com/logo_webflow.png'
+    },
+    {
+        url: 'https://www.figma.com/',
+        keywords: ['UI design', 'prototyping', 'collaboration', 'vector graphics'],
+        imageUrl: 'https://example.com/logo_figma.png'
+    },
+    {
+        url: 'https://www.adobe.com/products/xd.html',
+        keywords: ['UI/UX design', 'prototyping', 'collaborative tools', 'design system'],
+        imageUrl: 'https://example.com/logo_adobe_xd.png'
+    },
+    {
+        url: 'https://www.sketch.com/',
+        keywords: ['UI design', 'prototyping', 'vector graphics', 'plugins'],
+        imageUrl: 'https://example.com/logo_sketch.png'
+    },
+    {
+        url: 'https://www.readymag.com/',
+        keywords: ['web design', 'visual editor', 'no-code', 'animation'],
+        imageUrl: 'https://example.com/logo_readymag.png'
+    },
+    {
+        url: 'https://www.carrd.co/',
+        keywords: ['one-page websites', 'no-code', 'responsive design', 'portfolio sites'],
+        imageUrl: 'https://example.com/logo_carrd.png'
+    },
+    {
+        url: 'https://www.editorx.com/',
+        keywords: ['advanced web design', 'no-code', 'responsive', 'Wix'],
+        imageUrl: 'https://example.com/logo_editorx.png'
+    },
+    {
+        url: 'https://www.spline.design/',
+        keywords: ['3D design', 'interactive content', 'no-code', 'web graphics'],
+        imageUrl: 'https://example.com/logo_spline.png'
+    },
+    {
+        url: 'https://bubble.io/',
+        keywords: ['web app builder', 'no-code', 'database', 'responsive design'],
+        imageUrl: 'https://example.com/logo_bubble.png'
+    },
+    {
+        url: 'https://www.tilda.cc/',
+        keywords: ['website builder', 'no-code', 'e-commerce', 'SEO tools'],
+        imageUrl: 'https://example.com/logo_tilda.png'
+    },
+   {
+        url: 'https://framer.com/',
+        keywords: ['website builder', 'no-code', 'framer', 'drag drop'],
+        imageUrl: 'https://example.com/logo_tilda.png'
+    },
+    {
+        url: 'https://chat.openai.com/',
+        keywords: ['AI chatbot', 'language model', 'GPT-4', 'OpenAI'],
+        imageUrl: 'https://example.com/logo_openai_chat.png'
+    },
+    {
+        url: 'https://www.midjourney.com/',
+        keywords: ['AI art', 'image generation', 'Midjourney', 'creative AI'],
+        imageUrl: 'https://example.com/logo_midjourney.png'
+    },
+    {
+        url: 'https://www.jasper.ai/',
+        keywords: ['AI writing', 'content generation', 'copywriting', 'Jasper'],
+        imageUrl: 'https://example.com/logo_jasper.png'
+    },
+    {
+        url: 'https://www.deeplearning.ai/',
+        keywords: ['AI education', 'courses', 'deep learning', 'machine learning'],
+        imageUrl: 'https://example.com/logo_deeplearningai.png'
+    },
+    {
+        url: 'https://www.huggingface.co/',
+        keywords: ['AI models', 'natural language processing', 'transformers', 'machine learning'],
+        imageUrl: 'https://example.com/logo_huggingface.png'
+    },
+    {
+        url: 'https://www.runwayml.com/',
+        keywords: ['AI video', 'image editing', 'creative tools', 'deep learning'],
+        imageUrl: 'https://example.com/logo_runwayml.png'
+    },
+    {
+        url: 'https://www.replicastudios.com/',
+        keywords: ['AI voice', 'text-to-speech', 'voice cloning', 'AI voices'],
+        imageUrl: 'https://example.com/logo_replicastudios.png'
+    },
+    {
+        url: 'https://www.persado.com/',
+        keywords: ['AI marketing', 'content creation', 'persuasive language', 'natural language processing'],
+        imageUrl: 'https://example.com/logo_persado.png'
+    },
+    {
+        url: 'https://www.cohere.ai/',
+        keywords: ['NLP', 'AI language tools', 'text classification', 'language generation'],
+        imageUrl: 'https://example.com/logo_cohere.png'
+    },
+    {
+        url: 'https://www.copy.ai/',
+        keywords: ['AI writing', 'content generation', 'copywriting', 'GPT-3'],
+        imageUrl: 'https://example.com/logo_copyai.png'
+    },
+
+    // Sample Local Sites
+    {
+        url: 'https://www.localbank.co.in/',
+        keywords: ['banking', 'financial services', 'India', 'savings account'],
+        imageUrl: 'https://example.com/logo_localbank.png'
+    },
+    {
+        url: 'https://www.localnewspaper.co.uk/',
+        keywords: ['news', 'current events', 'UK', 'local coverage'],
+        imageUrl: 'https://example.com/logo_localnewspaper.png'
+    },
+    {
+        url: 'https://www.localhealth.ca/',
+        keywords: ['healthcare', 'medical services', 'Canada', 'doctors'],
+        imageUrl: 'https://example.com/logo_localhealth.png'
+    },
+    {
+        url: 'https://www.localshopping.au/',
+        keywords: ['e-commerce', 'shopping', 'Australia', 'local products'],
+        imageUrl: 'https://example.com/logo_localshopping.png'
+    },
+    {
+        url: 'https://www.localweather.jp/',
+        keywords: ['weather', 'forecast', 'Japan', 'local weather updates'],
+        imageUrl: 'https://example.com/logo_localweather.png'
+    },
+  
+  
                             
                               
                                 
