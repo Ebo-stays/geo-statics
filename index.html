@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Search - Gemini Style</title>
+    <title>Enhanced AI Search - Gemini Style</title>
     <link href="https://example.com/icon.png" rel="icon">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -22,7 +22,7 @@
             padding: 20px;
         }
         .greeting {
-            font-size: 30px;
+            font-size: 24px;
             color: #333;
             margin-top: 50px;
             text-align: center;
@@ -76,36 +76,42 @@
         .answer-overview {
             display: flex;
             flex-direction: column;
-            background-color: #f1f3f4; /* Light grey background */
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
-            border-left: 4px solid #4285f4; /* Google-like blue accent */
-            font-size: 16px;
+            border-left: 4px solid #4285f4;
             color: #333;
             position: relative;
+            transition: background-color 0.3s ease;
         }
         .overview-title {
             font-weight: bold;
             font-size: 20px;
             margin-bottom: 10px;
-            color: #4285f4; /* Single blue color for "Bloops" text */
+            color: #4285f4;
         }
         .overview-title span {
-            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853); /* Multi-colored background */
+            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853);
             -webkit-background-clip: text;
             color: transparent;
-            font-weight: bold;
+        }
+        .overview-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px 0;
+            border-radius: 8px;
+            align-self: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="greeting">नमस्ते</h1>
+        <h1 class="greeting">नमस्ते, Vinayak</h1>
         <div id="answerOverview" class="answer-overview" style="display: none;">
             <div class="overview-title">
                 <span>Bloops AI Overview</span>
             </div>
+            <img id="overviewImage" class="overview-image" src="" alt="Overview Image" style="display: none;">
             <div id="overviewText"></div>
         </div>
         <div class="results-container" id="resultsContainer"></div>
@@ -128,39 +134,62 @@
         const resultsContainer = document.getElementById('resultsContainer');
         const answerOverview = document.getElementById('answerOverview');
         const overviewText = document.getElementById('overviewText');
+        const overviewImage = document.getElementById('overviewImage');
 
-        // Perform search and API-based answer fetching
+        const backgroundColors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFE0B2', '#D1C4E9'];
+
+        function getRandomColor() {
+            return backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+        }
+
         async function search(query) {
             if (!query) return;
 
-            resultsContainer.innerHTML = ''; // Clear previous results
-            answerOverview.style.display = 'none'; // Hide previous answer overview
+            resultsContainer.innerHTML = '';
+            answerOverview.style.display = 'none';
 
-            // API call to get AI-generated answer for question-like queries
             const aiAnswer = await getAIAnswer(query);
 
-            // Display the AI answer if available
             if (aiAnswer) {
                 answerOverview.style.display = 'flex';
                 overviewText.textContent = aiAnswer;
+                answerOverview.style.backgroundColor = getRandomColor();
+
+                const imageUrl = await getRelatedImage(query);
+                if (imageUrl) {
+                    overviewImage.src = imageUrl;
+                    overviewImage.style.display = 'block';
+                } else {
+                    overviewImage.style.display = 'none';
+                }
             }
 
-            // Search and display results from local data
-            const results = searchData.filter(item => 
+            const results = searchData.filter(item =>
                 item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query))
             );
             displayResults(results, resultsContainer);
         }
 
-        // Function to get an AI-generated answer using DuckDuckGo API
         async function getAIAnswer(query) {
             const endpoint = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`;
             try {
                 const response = await fetch(endpoint);
                 const data = await response.json();
-                return data.Abstract || null; // Return the abstract (summary) if available
+                return data.Abstract || null;
             } catch (error) {
                 console.error('Error fetching answer from AI API:', error);
+                return null;
+            }
+        }
+
+        async function getRelatedImage(query) {
+            const imageUrl = `https://api.example.com/image/${encodeURIComponent(query)}`;
+            try {
+                const response = await fetch(imageUrl);
+                const data = await response.json();
+                return data.imageUrl || null;
+            } catch (error) {
+                console.error('Error fetching related image:', error);
                 return null;
             }
         }
@@ -178,15 +207,14 @@
                     <div class="result-description">Keywords: ${item.keywords.join(', ')}</div>
                 `;
                 resultCard.onclick = () => {
-                    window.location.href = item.url; // Open the URL in the same tab
+                    window.location.href = item.url;
                 };
                 container.appendChild(resultCard);
             });
         }
 
         function activateMicrophone() {
-            // Placeholder for microphone functionality
-            alert('Microphone activated!'); // Placeholder action
+            alert('Microphone activated!');
         }
     </script>
 </body>
