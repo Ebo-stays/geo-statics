@@ -3,54 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Search - Gemini Style</title>
-    <link href="https://example.com/icon.png" rel="icon" media="(prefers-color-scheme: light)">
+    <title>Enhanced Search - Gemini Style</title>
+    <link href="https://example.com/icon.png" rel="icon">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+        .greeting {
+            font-size: 24px;
+            color: #333;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .search-bar-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            padding: 10px;
+            background-color: white;
+            border-top: 1px solid #ddd;
+        }
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            padding: 10px;
+            background-color: #f1f3f4;
+            border-radius: 24px;
+            align-items: center;
+        }
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-button, .mic-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        .results-container {
+            margin-top: 20px;
+        }
+        .result-card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+        }
+        .result-title {
+            font-weight: bold;
+            color: #1a0dab;
+        }
+        .answer-overview {
+            display: flex;
+            flex-direction: column;
+            background-color: #f1f3f4; /* Light grey background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4285f4; /* Google-like blue accent */
+            font-size: 16px;
+            color: #333;
+            position: relative;
+        }
+        .overview-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #4285f4; /* Single blue color for "Bloops" text */
+        }
+        .overview-title span {
+            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853); /* Multi-colored background */
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1 class="greeting">नमस्ते, Vinayak</h1>
+        <div id="answerOverview" class="answer-overview" style="display: none;">
+            <div class="overview-title">
+                <span>Bloops AI Overview</span>
+            </div>
+            <div id="overviewText"></div>
+        </div>
+        <div class="results-container" id="resultsContainer"></div>
+    </div>
+
+    <div class="search-bar-container">
         <div class="search-bar">
-            <input type="text" placeholder="Search again..." class="search-input" id="searchQuery">
+            <input type="text" placeholder="Search or ask a question..." class="search-input" id="searchQuery">
             <button class="search-button" onclick="search(document.getElementById('searchQuery').value)">
-                <img src="https://play-lh.googleuservijZqJOW0FUt4Zvdo9kF5SS_rzCadc1-nOJogJ6AQiy1Kswr8arD8CKmE=w480-h960-rw" alt="Search">
+                🔍
             </button>
             <button class="mic-button" onclick="activateMicrophone()">
-                <img src="https://example.com/mic-icon.png" alt="Microphone">
+                🎙️
             </button>
-        </div>
-        <div class="results" id="resultsContainer"></div>
-        <button class="history-button" onclick="toggleHistory()">🕒 History</button>
-        <div class="history-overlay" id="historyOverlay">
-            <h2>Search History</h2>
-            <ul id="historyList"></ul>
-            <button onclick="toggleHistory()">Close</button>
         </div>
     </div>
 
     <script src="https://ebo-stays.github.io/geo-statics/data.js"></script>
     <script>
-        let searchHistory = [];
+        const resultsContainer = document.getElementById('resultsContainer');
+        const answerOverview = document.getElementById('answerOverview');
+        const overviewText = document.getElementById('overviewText');
 
-        document.getElementById('searchQuery').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                search(this.value);
+        // Perform search and API-based answer fetching
+        async function search(query) {
+            if (!query) return;
+
+            resultsContainer.innerHTML = ''; // Clear previous results
+            answerOverview.style.display = 'none'; // Hide previous answer overview
+
+            // API call to get AI-generated answer for question-like queries
+            const aiAnswer = await getAIAnswer(query);
+
+            // Display the AI answer if available
+            if (aiAnswer) {
+                answerOverview.style.display = 'flex';
+                overviewText.textContent = aiAnswer;
             }
-        });
 
-        function search(query) {
-            const resultsContainer = document.getElementById('resultsContainer');
-            const results = searchData.filter(item => item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query)));
+            // Search and display results from local data
+            const results = searchData.filter(item => 
+                item.url.includes(query) || item.keywords.some(keyword => keyword.includes(query))
+            );
             displayResults(results, resultsContainer);
+        }
 
-            if (query) {
-                searchHistory.push(query);
-                localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        // Function to get an AI-generated answer using DuckDuckGo API
+        async function getAIAnswer(query) {
+            const endpoint = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`;
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                return data.Abstract || null; // Return the abstract (summary) if available
+            } catch (error) {
+                console.error('Error fetching answer from AI API:', error);
+                return null;
             }
         }
 
         function displayResults(results, container) {
-            container.innerHTML = '';
             if (results.length === 0) {
                 container.innerHTML = '<p>No results found.</p>';
                 return;
@@ -69,27 +184,8 @@
             });
         }
 
-        function toggleHistory() {
-            const historyOverlay = document.getElementById('historyOverlay');
-            historyOverlay.style.display = historyOverlay.style.display === 'block' ? 'none' : 'block';
-            if (historyOverlay.style.display === 'block') {
-                loadHistory();
-            }
-        }
-
-        function loadHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-            const savedHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-            savedHistory.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                historyList.appendChild(li);
-            });
-        }
-
         function activateMicrophone() {
-            // Implement microphone functionality here
+            // Placeholder for microphone functionality
             alert('Microphone activated!'); // Placeholder action
         }
     </script>
