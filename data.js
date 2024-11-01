@@ -951,6 +951,167 @@ url: 'https://www.jiocinema.com',
         keywords: ['weather', 'forecast', 'Japan', 'local weather updates'],
         imageUrl: 'https://example.com/logo_localweather.png'
     },
+  {
+  url: 'https://www.infosys.com',
+  keywords: ['Infosys', 'IT services', 'technology solutions', 'consulting'],
+  imageUrl: 'https://example.com/logo_infosys.png'
+},
+{
+  url: 'https://www.tcs.com',
+  keywords: ['TCS', 'Tata Consultancy Services', 'IT services', 'technology consulting', 'global'],
+  imageUrl: 'https://example.com/logo_tcs.png'
+},
+{
+  url: 'https://www.wipro.com',
+  keywords: ['Wipro', 'technology services', 'consulting', 'IT solutions'],
+  imageUrl: 'https://example.com/logo_wipro.png'
+},
+{
+  url: 'https://www.hcltech.com',
+  keywords: ['HCL', 'HCL Technologies', 'IT services', 'digital transformation'],
+  imageUrl: 'https://example.com/logo_hcl.png'
+},
+{
+  url: 'https://www.techmahindra.com',
+  keywords: ['Tech Mahindra', 'IT solutions', 'technology services', 'consulting', 'digital'],
+  imageUrl: 'https://example.com/logo_tech_mahindra.png'
+},
+{
+  url: 'https://www.reliancejio.com',
+  keywords: ['Jio', 'telecom', 'digital services', 'Reliance', 'network'],
+  imageUrl: 'https://example.com/logo_jio.png'
+},
+{
+  url: 'https://www.flipkart.com',
+  keywords: ['Flipkart', 'e-commerce', 'online shopping', 'Indian retailer'],
+  imageUrl: 'https://example.com/logo_flipkart.png'
+},
+{
+  url: 'https://www.zomato.com',
+  keywords: ['Zomato', 'food delivery', 'restaurant', 'online ordering'],
+  imageUrl: 'https://example.com/logo_zomato.png'
+},
+{
+  url: 'https://www.paytm.com',
+  keywords: ['Paytm', 'digital payments', 'financial services', 'wallet', 'UPI'],
+  imageUrl: 'https://example.com/logo_paytm.png'
+},
+{
+  url: 'https://www.ola.com',
+  keywords: ['Ola', 'ride-sharing', 'transportation', 'cab services', 'Indian startup'],
+  imageUrl: 'https://example.com/logo_ola.png'
+},
+{
+  url: 'https://www.bajajfinserv.in',
+  keywords: ['Bajaj Finserv', 'financial services', 'lending', 'insurance', 'investments'],
+  imageUrl: 'https://example.com/logo_bajaj_finserv.png'
+},
+{
+  url: 'https://www.adityabirlacapital.com',
+  keywords: ['Aditya Birla Capital', 'financial services', 'investment', 'wealth management', 'insurance'],
+  imageUrl: 'https://example.com/logo_aditya_birla.png'
+},
+{
+  url: 'https://www.myntra.com',
+  keywords: ['Myntra', 'fashion', 'e-commerce', 'online shopping', 'clothing'],
+  imageUrl: 'https://example.com/logo_myntra.png'
+},
+{
+  url: 'https://www.swiggy.com',
+  keywords: ['Swiggy', 'food delivery', 'restaurant', 'online food ordering'],
+  imageUrl: 'https://example.com/logo_swiggy.png'
+},
+{
+  url: 'https://www.byjus.com',
+  keywords: ['Byju’s', 'edtech', 'online learning', 'education', 'Indian startup'],
+  imageUrl: 'https://example.com/logo_byjus.png'
+},
+{
+  url: 'https://www.dream11.com',
+  keywords: ['Dream11', 'fantasy sports', 'gaming', 'cricket', 'sports platform'],
+  imageUrl: 'https://example.com/logo_dream11.png'
+},
+{
+  url: 'https://www.naukri.com',
+  keywords: ['Naukri', 'job portal', 'career', 'recruitment', 'employment'],
+  imageUrl: 'https://example.com/logo_naukri.png'
+},
+{
+  url: 'https://www.hdfcbank.com',
+  keywords: ['HDFC Bank', 'banking', 'financial services', 'loans', 'savings'],
+  imageUrl: 'https://example.com/logo_hdfc_bank.png'
+},
+{
+  url: 'https://www.icicibank.com',
+  keywords: ['ICICI Bank', 'banking', 'financial services', 'loans', 'savings'],
+  imageUrl: 'https://example.com/logo_icici_bank.png'
+},
+{
+  url: 'https://www.axisbank.com',
+  keywords: ['Axis Bank', 'banking', 'financial services', 'loans', 'wealth management'],
+  imageUrl: 'https://example.com/logo_axis_bank.png'
+},
+{
+  url: 'https://www.sbi.co.in',
+  keywords: ['SBI', 'State Bank of India', 'banking', 'financial services', 'loans', 'savings'],
+  imageUrl: 'https://example.com/logo_sbi.png'
+},
+{
+  url: 'https://www.kotak.com',
+  keywords: ['Kotak Mahindra Bank', 'banking', 'financial services', 'loans', 'investment'],
+  imageUrl: 'https://example.com/logo_kotak.png'
+},
+{
+  url: 'https://www.bobfinancial.com',
+  keywords: ['Bank of Baroda', 'banking', 'financial services', 'loans', 'credit'],
+  imageUrl: 'https://example.com/logo_bob.png'
+},
+{
+  url: 'https://www.pnbindia.in',
+  keywords: ['Punjab National Bank', 'banking', 'financial services', 'loans', 'savings'],
+  imageUrl: 'https://example.com/logo_pnb.png'
+},
+{
+  url: 'https://www.npci.org.in',
+  keywords: ['NPCI', 'National Payments Corporation of India', 'digital payments', 'UPI', 'financial services'],
+  imageUrl: 'https://example.com/logo_npci.png'
+},
+{
+  url: 'https://www.indiapost.gov.in',
+  keywords: ['India Post', 'post office', 'postal services', 'money transfer', 'savings'],
+  imageUrl: 'https://example.com/logo_indiapost.png'
+},
+{
+  url: 'https://www.phonepe.com',
+  keywords: ['PhonePe', 'digital payments', 'UPI', 'financial services', 'wallet'],
+  imageUrl: 'https://example.com/logo_phonepe.png'
+},
+{
+  url: 'https://www.bhimupi.org.in',
+  keywords: ['BHIM', 'UPI', 'digital payments', 'financial services', 'money transfer'],
+  imageUrl: 'https://example.com/logo_bhim.png'
+},
+{
+  url: 'https://www.razorpay.com',
+  keywords: ['Razorpay', 'payment gateway', 'digital payments', 'financial services', 'online transactions'],
+  imageUrl: 'https://example.com/logo_razorpay.png'
+},
+{
+  url: 'https://www.payumoney.com',
+  keywords: ['PayU', 'digital payments', 'payment gateway', 'financial services', 'online payments'],
+  imageUrl: 'https://example.com/logo_payumoney.png'
+},
+{
+  url: 'https://www.muthootfinance.com',
+  keywords: ['Muthoot Finance', 'gold loans', 'financial services', 'money lending', 'non-banking finance'],
+  imageUrl: 'https://example.com/logo_muthoot.png'
+},
+{
+  url: 'https://www.manappuram.com',
+  keywords: ['Manappuram Finance', 'gold loans', 'financial services', 'money lending', 'non-banking finance'],
+  imageUrl: 'https://example.com/logo_manappuram.png'
+  }
+             
   
   
                             
