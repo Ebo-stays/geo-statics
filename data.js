@@ -2,6 +2,72 @@
 
 const searchData = [
   {
+    url: 'https://www.rss.org',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.bjp.org',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.mojapp.in',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.inc.in',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.blooops.github.io/services',
+    keywords: ['Ai', 'bloops', 'search'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.github.com',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.voltas.com',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://grow.in',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://www.zerodha.com',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://olakrutrim.com',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://quora.com',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://rapido.bike',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+{
+    url: 'https://magicpin.in',
+    keywords: ['example', 'demo', 'test'],
+    imageUrl: 'https://example.com/logo.png'
+  },
+  
+  {
     url: 'https://www.facebook.com/',
     keywords: ['example', 'demo', 'test'],
     imageUrl: 'https://example.com/logo.png'
