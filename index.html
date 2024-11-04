@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced AI Search - Gemini Style</title>
@@ -67,6 +68,17 @@
             border-radius: 8px;
             background-color: white;
             cursor: pointer;
+            position: relative;
+        }
+        .visited-stripe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            border-radius: 8px;
         }
         .result-title {
             font-weight: normal;
@@ -136,6 +148,7 @@
         const overviewImage = document.getElementById('overviewImage');
 
         const backgroundColors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFE0B2', '#D1C4E9'];
+        const visitedLinks = new Set();
 
         function getRandomColor() {
             return backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
@@ -148,13 +161,14 @@
             answerOverview.style.display = 'none';
 
             const aiAnswer = await getAIAnswer(query);
+            const correctedQuery = await correctQueryLanguage(query);
 
             if (aiAnswer) {
                 answerOverview.style.display = 'flex';
                 overviewText.textContent = aiAnswer;
                 answerOverview.style.backgroundColor = getRandomColor();
 
-                const imageUrl = await getRelatedImage(query);
+                const imageUrl = await getRelatedImage(correctedQuery);
                 if (imageUrl) {
                     overviewImage.src = imageUrl;
                     overviewImage.style.display = 'block';
@@ -193,6 +207,18 @@
             }
         }
 
+        async function correctQueryLanguage(query) {
+            const endpoint = `https://api.lingva.ml/translate?q=${encodeURIComponent(query)}&source=auto&target=en`;
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                return data.translatedText || query;
+            } catch (error) {
+                console.error('Error correcting query language:', error);
+                return query;
+            }
+        }
+
         function displayResults(results, container) {
             if (results.length === 0) {
                 container.innerHTML = '<p>No results found.</p>';
@@ -201,21 +227,36 @@
             results.forEach(item => {
                 const resultCard = document.createElement('div');
                 resultCard.className = 'result-card';
-                resultCard.innerHTML = `
+                if (visitedLinks.has(item.url)) {
+                    resultCard.innerHTML += '<div class="visited-stripe"></div>';
+                }
+                resultCard.innerHTML += `
                     <div class="result-title">${item.url}</div>
                     <div class="result-description">Keywords: ${item.keywords.join(', ')}</div>
                 `;
                 resultCard.onclick = () => {
                     window.location.href = item.url;
+                    visitedLinks.add(item.url);
                 };
                 container.appendChild(resultCard);
             });
         }
 
         function activateMicrophone() {
-            alert('Microphone activated!');
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('searchQuery').value = transcript;
+                search(transcript);
+            };
+
+            recognition.onerror = (event) => {
+                alert('Microphone error: ' + event.error);
+            };
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
