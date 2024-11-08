@@ -1176,14 +1176,7 @@ url: 'https://www.jiocinema.com',
   url: 'https://www.manappuram.com',
   keywords: ['Manappuram Finance', 'gold loans', 'financial services', 'money lending', 'non-banking finance'],
   imageUrl: 'https://example.com/logo_manappuram.png'
-  }
-  },
-    {
-        url: 'https://www.blooops.github.io//',
-        keywords: ['NLP', 'text classification', 'language generation'],
-        imageUrl: 'https://example.com/logo_cohere.png'
-    },
-  },
+},
     {
         url: 'https://blooops.github.io/Services/app]',
         keywords: ['chatbot', 'ai', 'navsara', 'NAVSARA'],
