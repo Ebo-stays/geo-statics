@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    button {
+      background-color: #6a00dc;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background-color: #5300a8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Edit Profile</h2>
+    
+    <!-- Current password field to confirm changes -->
+    <input type="password" id="currentPassword" placeholder="Enter Current Password" />
+    
+    <!-- Profile Fields -->
+    <input type="text" id="name" placeholder="First Name" />
+    <input type="text" id="lastName" placeholder="Last Name" />
+    <input type="text" id="mobile" placeholder="Mobile Number" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="file" id="dp" accept="image/*" />
+    
+    <!-- New password input (optional) -->
+    <input type="password" id="newPassword" placeholder="New Password (Optional)" />
+    <input type="password" id="confirmNewPassword" placeholder="Confirm New Password (Optional)" />
+    
+    <button onclick="saveProfile()">Save Changes</button>
+  </div>
+
+  <script>
+    // Get the current user from localStorage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    
+    // Redirect to login page if no user is logged in
+    if (!currentUser) {
+      alert("You need to log in first!");
+      window.location.href = "index.html";
+    }
+
+    // Prefill the profile fields with the current user's data
+    document.getElementById("name").value = currentUser.name || "";
+    document.getElementById("lastName").value = currentUser.lastName || "";
+    document.getElementById("mobile").value = currentUser.mobile || "";
+    document.getElementById("email").value = currentUser.email || "";
+
+    // Save the profile changes
+    function saveProfile() {
+      const currentPassword = document.getElementById("currentPassword").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const dp = document.getElementById("dp").files[0];
+      const newPassword = document.getElementById("newPassword").value.trim();
+      const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
+
+      // Check if the current password is correct
+      if (currentPassword !== currentUser.password) {
+        alert("Incorrect current password!");
+        return;
+      }
+
+      // Validate new password if entered
+      if (newPassword && newPassword !== confirmNewPassword) {
+        alert("New passwords do not match!");
+        return;
+      }
+
+      // Update the user details in localStorage
+      currentUser.name = name;
+      currentUser.lastName = lastName;
+      currentUser.mobile = mobile;
+      currentUser.email = email;
+
+      // If new password is provided, update the password
+      if (newPassword) {
+        currentUser.password = newPassword;
+      }
+
+      // Handle profile picture (if changed)
+      if (dp) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          currentUser.dp = event.target.result; // Set DP as base64 string
+          saveToStorage();
+        };
+        reader.readAsDataURL(dp);
+      } else {
+        saveToStorage(); // If DP is not updated, directly save the changes
+      }
+    }
+
+    // Save the updated user data back to localStorage
+    function saveToStorage() {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      
+      // Find the index of the current user and update their details
+      const updatedUsers = users.map(user =>
+        user.id === currentUser.id ? currentUser : user
+      );
+
+      // Save the updated user list and current user in localStorage
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      alert("Profile updated successfully!");
+      window.location.href = "profile.html"; // Redirect to profile page
+    }
+  </script>
+</body>
+</html>
