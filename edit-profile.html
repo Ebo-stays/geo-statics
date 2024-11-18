@@ -137,6 +137,7 @@
     <input type="text" id="lastName" placeholder="Last Name">
     <input type="text" id="mobile" placeholder="Mobile Number">
     <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="New Password (Optional)">
     <button onclick="saveProfile()">Save Changes</button>
   </div>
 
@@ -211,6 +212,9 @@
         currentUser.dp = selectedIllustration;
         updateUser();
       }
+
+      const newPassword = document.getElementById("password").value.trim();
+      if (newPassword) currentUser.password = newPassword;
     }
 
     function updateUser() {
