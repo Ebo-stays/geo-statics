@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
+  <script src="imagedata.js"></script>
   <style>
     body {
       margin: 0;
@@ -18,12 +19,31 @@
     .container {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
-      padding: 30px;
+      padding: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       width: 400px;
+      position: relative;
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid white;
+    }
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     h2 {
       text-align: center;
+      margin-top: 60px;
     }
     input, button {
       margin: 10px 0;
@@ -43,107 +63,164 @@
     button:hover {
       background-color: #5300a8;
     }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .overlay-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80%;
+      overflow-y: auto;
+      position: relative;
+    }
+    .overlay h3 {
+      margin-bottom: 10px;
+    }
+    .overlay input {
+      margin-bottom: 15px;
+      padding: 10px;
+      width: calc(100% - 20px);
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      display: block;
+    }
+    .illustrations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-around;
+    }
+    .illustrations img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .illustrations img.selected {
+      border-color: #6a00dc;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      background: #cc0000;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="profile-pic" onclick="openOverlay()">
+      <img id="currentDP" src="https://via.placeholder.com/100/cccccc/000000?text=DP" alt="Profile Picture">
+    </div>
     <h2>Edit Profile</h2>
-    
-    <!-- Current password field to confirm changes -->
-    <input type="password" id="currentPassword" placeholder="Enter Current Password" />
-    
-    <!-- Profile Fields -->
-    <input type="text" id="name" placeholder="First Name" />
-    <input type="text" id="lastName" placeholder="Last Name" />
-    <input type="text" id="mobile" placeholder="Mobile Number" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="file" id="dp" accept="image/*" />
-    
-    <!-- New password input (optional) -->
-    <input type="password" id="newPassword" placeholder="New Password (Optional)" />
-    <input type="password" id="confirmNewPassword" placeholder="Confirm New Password (Optional)" />
-    
+    <input type="text" id="name" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <input type="text" id="mobile" placeholder="Mobile Number">
+    <input type="email" id="email" placeholder="Email">
     <button onclick="saveProfile()">Save Changes</button>
   </div>
 
-  <script>
-    // Get the current user from localStorage
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    
-    // Redirect to login page if no user is logged in
-    if (!currentUser) {
-      alert("You need to log in first!");
-      window.location.href = "index.html";
-    }
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <button class="close-btn" onclick="closeOverlay()">Close</button>
+      <h3>Choose a Profile Picture</h3>
+      <input type="text" id="search" placeholder="Search by keyword..." oninput="filterIllustrations()">
+      <div class="illustrations" id="illustrationContainer"></div>
+      <h4>Or Upload Your Own</h4>
+      <input type="file" id="uploadDP" accept="image/*">
+    </div>
+  </div>
 
-    // Prefill the profile fields with the current user's data
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+    const illustrationContainer = document.getElementById("illustrationContainer");
+    const overlay = document.getElementById("overlay");
+    let selectedIllustration = currentUser.dp || "";
+
+    document.getElementById("currentDP").src = selectedIllustration || "https://via.placeholder.com/100/cccccc/000000?text=DP";
     document.getElementById("name").value = currentUser.name || "";
     document.getElementById("lastName").value = currentUser.lastName || "";
     document.getElementById("mobile").value = currentUser.mobile || "";
     document.getElementById("email").value = currentUser.email || "";
 
-    // Save the profile changes
+    function openOverlay() {
+      overlay.style.display = "flex";
+      loadIllustrations();
+    }
+
+    function closeOverlay() {
+      overlay.style.display = "none";
+    }
+
+    function loadIllustrations() {
+      illustrationContainer.innerHTML = "";
+      illustrationImages.forEach((imgData) => {
+        const img = document.createElement("img");
+        img.src = imgData.url;
+        img.alt = imgData.keywords.join(", ");
+        img.onclick = () => selectIllustration(imgData.url, img);
+        if (imgData.url === selectedIllustration) img.classList.add("selected");
+        illustrationContainer.appendChild(img);
+      });
+    }
+
+    function selectIllustration(url, img) {
+      selectedIllustration = url;
+      document.querySelectorAll(".illustrations img").forEach((el) => el.classList.remove("selected"));
+      img.classList.add("selected");
+    }
+
+    function filterIllustrations() {
+      const query = document.getElementById("search").value.toLowerCase();
+      document.querySelectorAll(".illustrations img").forEach((img) => {
+        const keywords = img.alt.toLowerCase();
+        img.style.display = keywords.includes(query) ? "block" : "none";
+      });
+    }
+
     function saveProfile() {
-      const currentPassword = document.getElementById("currentPassword").value.trim();
-      const name = document.getElementById("name").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const mobile = document.getElementById("mobile").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const dp = document.getElementById("dp").files[0];
-      const newPassword = document.getElementById("newPassword").value.trim();
-      const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
-
-      // Check if the current password is correct
-      if (currentPassword !== currentUser.password) {
-        alert("Incorrect current password!");
-        return;
-      }
-
-      // Validate new password if entered
-      if (newPassword && newPassword !== confirmNewPassword) {
-        alert("New passwords do not match!");
-        return;
-      }
-
-      // Update the user details in localStorage
-      currentUser.name = name;
-      currentUser.lastName = lastName;
-      currentUser.mobile = mobile;
-      currentUser.email = email;
-
-      // If new password is provided, update the password
-      if (newPassword) {
-        currentUser.password = newPassword;
-      }
-
-      // Handle profile picture (if changed)
-      if (dp) {
+      const uploadedFile = document.getElementById("uploadDP").files[0];
+      if (uploadedFile) {
         const reader = new FileReader();
-        reader.onload = function (event) {
-          currentUser.dp = event.target.result; // Set DP as base64 string
-          saveToStorage();
+        reader.onload = (e) => {
+          currentUser.dp = e.target.result;
+          updateUser();
         };
-        reader.readAsDataURL(dp);
+        reader.readAsDataURL(uploadedFile);
       } else {
-        saveToStorage(); // If DP is not updated, directly save the changes
+        currentUser.dp = selectedIllustration;
+        updateUser();
       }
     }
 
-    // Save the updated user data back to localStorage
-    function saveToStorage() {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      
-      // Find the index of the current user and update their details
-      const updatedUsers = users.map(user =>
-        user.id === currentUser.id ? currentUser : user
-      );
-
-      // Save the updated user list and current user in localStorage
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
+    function updateUser() {
+      currentUser.name = document.getElementById("name").value.trim();
+      currentUser.lastName = document.getElementById("lastName").value.trim();
+      currentUser.mobile = document.getElementById("mobile").value.trim();
+      currentUser.email = document.getElementById("email").value.trim();
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      alert("Profile updated successfully!");
-      window.location.href = "profile.html"; // Redirect to profile page
+      document.getElementById("currentDP").src = currentUser.dp || "https://via.placeholder.com/100/cccccc/000000?text=DP";
+      closeOverlay();
     }
   </script>
 </body>
