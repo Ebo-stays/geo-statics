@@ -4,134 +4,165 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
-  <script src="imagedata.js"></script>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #f6f8fc;
+      margin: 0;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
     }
     .container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
+      background: white;
       padding: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       width: 400px;
-      position: relative;
+      text-align: center;
+    }
+    .container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .input-group label {
+      font-size: 14px;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
     }
     .profile-pic {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto;
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 4px solid white;
+      margin: 0 auto 20px;
+      background: #eee;
     }
     .profile-pic img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    h2 {
-      text-align: center;
-      margin-top: 60px;
-    }
-    input, button {
+    .dropdown, .search-bar {
       margin: 10px 0;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
     }
     button {
-      background-color: #6a00dc;
-      color: white;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
+      color: white;
+      background-color: #1a73e8;
       border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
     button:hover {
-      background-color: #5300a8;
+      background-color: #155ab6;
     }
-    .error-message {
+    .error {
       color: red;
       font-size: 14px;
-      text-align: center;
+      margin-top: 10px;
     }
-    .success-message {
+    .success {
       color: green;
       font-size: 14px;
-      text-align: center;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="profile-pic" onclick="openOverlay()">
+    <h2>Edit Profile</h2>
+    <div class="profile-pic" onclick="openIllustrationSelection()">
       <img id="currentDP" src="https://via.placeholder.com/100/cccccc/000000?text=DP" alt="Profile Picture">
     </div>
-    <h2>Edit Profile</h2>
     <div id="message"></div>
-    <input type="text" id="name" placeholder="First Name">
-    <input type="text" id="lastName" placeholder="Last Name">
-    <input type="text" id="mobile" placeholder="Mobile Number">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="New Password (Optional)">
+    <div class="input-group">
+      <label for="name">First Name</label>
+      <input type="text" id="name" placeholder="Enter your first name">
+    </div>
+    <div class="input-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" placeholder="Enter your last name">
+    </div>
+    <div class="input-group">
+      <label for="password">New Password</label>
+      <input type="password" id="password" placeholder="Enter a new password (optional)">
+    </div>
     <button onclick="saveProfile()">Save Changes</button>
+    <div class="error" id="errorMessage"></div>
+    <div class="success" id="successMessage"></div>
   </div>
 
   <script>
-    // Mock database for suspended users and restricted keywords
-    const restrictedKeywords = ["admin", "moderator", "test", "null", "undefined"];
-    const suspendedAccounts = ["John Doe", "Jane Admin"];
+    // Mock database
+    const restrictedKeywords = ["Mohammed ", "kaleem", "null"];
+    const suspendedAccounts = ["Mohammed Hanif", "hanif"];
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-    document.getElementById("currentDP").src = currentUser.dp || "https://via.placeholder.com/100/cccccc/000000?text=DP";
-    document.getElementById("name").value = currentUser.name || "";
-    document.getElementById("lastName").value = currentUser.lastName || "";
-    document.getElementById("mobile").value = currentUser.mobile || "";
-    document.getElementById("email").value = currentUser.email || "";
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {
+      name: "John",
+      lastName: "Doe",
+      dp: "https://via.placeholder.com/100/cccccc/000000?text=DP"
+    };
 
+    // Prefill inputs
+    document.getElementById("name").value = currentUser.name;
+    document.getElementById("lastName").value = currentUser.lastName;
+    document.getElementById("currentDP").src = currentUser.dp;
+
+    // Save profile function
     function saveProfile() {
-      const message = document.getElementById("message");
-      const firstName = document.getElementById("name").value.trim();
+      const name = document.getElementById("name").value.trim();
       const lastName = document.getElementById("lastName").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMessage = document.getElementById("errorMessage");
+      const successMessage = document.getElementById("successMessage");
 
-      // Check for restricted keywords
-      if (restrictedKeywords.some((word) => firstName.toLowerCase().includes(word) || lastName.toLowerCase().includes(word))) {
-        message.innerHTML = `<div class="error-message">Error: Your name contains restricted keywords.</div>`;
+      errorMessage.innerHTML = "";
+      successMessage.innerHTML = "";
+
+      if (!name || !lastName) {
+        errorMessage.innerHTML = "Error: Both First Name and Last Name are required.";
         return;
       }
 
-      // Check for suspended accounts
-      const fullName = `${firstName} ${lastName}`;
-      if (suspendedAccounts.includes(fullName)) {
-        message.innerHTML = `<div class="error-message">Your account is suspended.</div>`;
+      if (restrictedKeywords.some(keyword => name.toLowerCase().includes(keyword) || lastName.toLowerCase().includes(keyword))) {
+        errorMessage.innerHTML = "Error: Restricted keywords are not allowed.";
         return;
       }
 
-      // Save profile changes
-      currentUser.name = firstName;
+      if (suspendedAccounts.includes(`${name} ${lastName}`)) {
+        errorMessage.innerHTML = "Your account is suspended.";
+        return;
+      }
+
+      currentUser.name = name;
       currentUser.lastName = lastName;
-      currentUser.mobile = document.getElementById("mobile").value.trim();
-      currentUser.email = document.getElementById("email").value.trim();
-
-      const newPassword = document.getElementById("password").value.trim();
-      if (newPassword) currentUser.password = newPassword;
-
+      if (password) currentUser.password = password;
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-      message.innerHTML = `<div class="success-message">Profile updated successfully!</div>`;
+      successMessage.innerHTML = "Profile updated successfully!";
+    }
+
+    // Mock function to open illustration selection
+    function openIllustrationSelection() {
+      alert("Illustration selection overlay would open here.");
     }
   </script>
 </body>
