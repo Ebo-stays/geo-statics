@@ -4,185 +4,227 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
+  <script src="imagedata.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f6f8fc;
       margin: 0;
+      font-family: Arial, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
     }
     .container {
-      background: white;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       width: 400px;
-      text-align: center;
-    }
-    .container h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-    .input-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    .input-group label {
-      font-size: 14px;
-      color: #555;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .input-group input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-sizing: border-box;
+      position: relative;
     }
     .profile-pic {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 20px;
-      background: #eee;
-      position: relative;
+      margin: 0 auto;
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid white;
     }
     .profile-pic img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .profile-pic input {
-      display: none;
+    h2 {
+      text-align: center;
+      margin-top: 60px;
     }
-    .change-image {
-      background-color: #1a73e8;
-      color: white;
-      padding: 6px 12px;
-      font-size: 12px;
+    input, button {
+      margin: 10px 0;
+      padding: 12px;
+      width: 100%;
       border-radius: 8px;
-      cursor: pointer;
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      font-size: 16px;
     }
     button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      font-weight: bold;
+      background-color: #6a00dc;
       color: white;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
+      border: none;
     }
     button:hover {
-      background-color: #155ab6;
+      background-color: #5300a8;
     }
-    .error {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
     }
-    .success {
-      color: green;
-      font-size: 14px;
-      margin-top: 10px;
+    .overlay-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80%;
+      overflow-y: auto;
+      position: relative;
+    }
+    .overlay h3 {
+      margin-bottom: 10px;
+    }
+    .overlay input {
+      margin-bottom: 15px;
+      padding: 10px;
+      width: calc(100% - 20px);
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      display: block;
+    }
+    .illustrations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-around;
+    }
+    .illustrations img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .illustrations img.selected {
+      border-color: #6a00dc;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      background: #cc0000;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Edit Profile</h2>
-    <div class="profile-pic">
+    <div class="profile-pic" onclick="openOverlay()">
       <img id="currentDP" src="https://via.placeholder.com/100/cccccc/000000?text=DP" alt="Profile Picture">
-      <label class="change-image">
-        Change
-        <input type="file" id="uploadImage" accept="image/*" onchange="updateProfileImage(event)">
-      </label>
     </div>
-    <div id="message"></div>
-    <div class="input-group">
-      <label for="name">First Name</label>
-      <input type="text" id="name" placeholder="Enter your first name">
-    </div>
-    <div class="input-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" placeholder="Enter your last name">
-    </div>
+    <h2>Edit Profile</h2>
+    <input type="text" id="name" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <input type="text" id="mobile" placeholder="Mobile Number">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="New Password (Optional)">
     <button onclick="saveProfile()">Save Changes</button>
-    <div class="error" id="errorMessage"></div>
-    <div class="success" id="successMessage"></div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <button class="close-btn" onclick="closeOverlay()">Close</button>
+      <h3>Choose a Profile Picture</h3>
+      <input type="text" id="search" placeholder="Search by keyword..." oninput="filterIllustrations()">
+      <div class="illustrations" id="illustrationContainer"></div>
+      <h4>Or Upload Your Own</h4>
+      <input type="file" id="uploadDP" accept="image/*">
+    </div>
   </div>
 
   <script>
-    // Mock database
-    const restrictedKeywords = ["Mohammed", "Hanif"];
-    const suspendedAccounts = ["Mohammed Hanif"];
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+    const illustrationContainer = document.getElementById("illustrationContainer");
+    const overlay = document.getElementById("overlay");
+    let selectedIllustration = currentUser.dp || "";
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {
-      name: "John",
-      lastName: "Doe",
-      dp: "https://via.placeholder.com/100/cccccc/000000?text=DP"
-    };
+    document.getElementById("currentDP").src = selectedIllustration || "https://via.placeholder.com/100/cccccc/000000?text=DP";
+    document.getElementById("name").value = currentUser.name || "";
+    document.getElementById("lastName").value = currentUser.lastName || "";
+    document.getElementById("mobile").value = currentUser.mobile || "";
+    document.getElementById("email").value = currentUser.email || "";
 
-    // Prefill inputs
-    document.getElementById("name").value = currentUser.name;
-    document.getElementById("lastName").value = currentUser.lastName;
-    document.getElementById("currentDP").src = currentUser.dp;
-
-    // Update profile picture
-    function updateProfileImage(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById("currentDP").src = e.target.result;
-          currentUser.dp = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
+    function openOverlay() {
+      overlay.style.display = "flex";
+      loadIllustrations();
     }
 
-    // Save profile function
+    function closeOverlay() {
+      overlay.style.display = "none";
+    }
+
+    function loadIllustrations() {
+      illustrationContainer.innerHTML = "";
+      illustrationImages.forEach((imgData) => {
+        const img = document.createElement("img");
+        img.src = imgData.url;
+        img.alt = imgData.keywords.join(", ");
+        img.onclick = () => selectIllustration(imgData.url, img);
+        if (imgData.url === selectedIllustration) img.classList.add("selected");
+        illustrationContainer.appendChild(img);
+      });
+    }
+
+    function selectIllustration(url, img) {
+      selectedIllustration = url;
+      document.querySelectorAll(".illustrations img").forEach((el) => el.classList.remove("selected"));
+      img.classList.add("selected");
+    }
+
+    function filterIllustrations() {
+      const query = document.getElementById("search").value.toLowerCase();
+      document.querySelectorAll(".illustrations img").forEach((img) => {
+        const keywords = img.alt.toLowerCase();
+        img.style.display = keywords.includes(query) ? "block" : "none";
+      });
+    }
+
     function saveProfile() {
-      const name = document.getElementById("name").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const errorMessage = document.getElementById("errorMessage");
-      const successMessage = document.getElementById("successMessage");
-
-      errorMessage.innerHTML = "";
-      successMessage.innerHTML = "";
-
-      if (!name || !lastName) {
-        errorMessage.innerHTML = "Error: Both First Name and Last Name are required.";
-        return;
+      const uploadedFile = document.getElementById("uploadDP").files[0];
+      if (uploadedFile) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          currentUser.dp = e.target.result;
+          updateUser();
+        };
+        reader.readAsDataURL(uploadedFile);
+      } else {
+        currentUser.dp = selectedIllustration;
+        updateUser();
       }
 
-      if (restrictedKeywords.includes(name) || restrictedKeywords.includes(lastName)) {
-        errorMessage.innerHTML = `Error: The name "${name} ${lastName}" contains restricted keywords.`;
-        return;
-      }
+      const newPassword = document.getElementById("password").value.trim();
+      if (newPassword) currentUser.password = newPassword;
+    }
 
-      if (suspendedAccounts.includes(`${name} ${lastName}`)) {
-        errorMessage.innerHTML = "Error: This account is suspended.";
-        return;
-      }
-
-      currentUser.name = name;
-      currentUser.lastName = lastName;
+    function updateUser() {
+      currentUser.name = document.getElementById("name").value.trim();
+      currentUser.lastName = document.getElementById("lastName").value.trim();
+      currentUser.mobile = document.getElementById("mobile").value.trim();
+      currentUser.email = document.getElementById("email").value.trim();
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      successMessage.innerHTML = "Profile updated successfully!";
+      document.getElementById("currentDP").src = currentUser.dp || "https://via.placeholder.com/100/cccccc/000000?text=DP";
+      closeOverlay();
     }
   </script>
 </body>
