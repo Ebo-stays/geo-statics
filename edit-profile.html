@@ -63,67 +63,15 @@
     button:hover {
       background-color: #5300a8;
     }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
+    .error-message {
+      color: red;
+      font-size: 14px;
+      text-align: center;
     }
-    .overlay-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 600px;
-      max-height: 80%;
-      overflow-y: auto;
-      position: relative;
-    }
-    .overlay h3 {
-      margin-bottom: 10px;
-    }
-    .overlay input {
-      margin-bottom: 15px;
-      padding: 10px;
-      width: calc(100% - 20px);
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      display: block;
-    }
-    .illustrations {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-around;
-    }
-    .illustrations img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-    .illustrations img.selected {
-      border-color: #6a00dc;
-    }
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff0000;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .close-btn:hover {
-      background: #cc0000;
+    .success-message {
+      color: green;
+      font-size: 14px;
+      text-align: center;
     }
   </style>
 </head>
@@ -133,6 +81,7 @@
       <img id="currentDP" src="https://via.placeholder.com/100/cccccc/000000?text=DP" alt="Profile Picture">
     </div>
     <h2>Edit Profile</h2>
+    <div id="message"></div>
     <input type="text" id="name" placeholder="First Name">
     <input type="text" id="lastName" placeholder="Last Name">
     <input type="text" id="mobile" placeholder="Mobile Number">
@@ -141,90 +90,48 @@
     <button onclick="saveProfile()">Save Changes</button>
   </div>
 
-  <div class="overlay" id="overlay">
-    <div class="overlay-content">
-      <button class="close-btn" onclick="closeOverlay()">Close</button>
-      <h3>Choose a Profile Picture</h3>
-      <input type="text" id="search" placeholder="Search by keyword..." oninput="filterIllustrations()">
-      <div class="illustrations" id="illustrationContainer"></div>
-      <h4>Or Upload Your Own</h4>
-      <input type="file" id="uploadDP" accept="image/*">
-    </div>
-  </div>
-
   <script>
-    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-    const illustrationContainer = document.getElementById("illustrationContainer");
-    const overlay = document.getElementById("overlay");
-    let selectedIllustration = currentUser.dp || "";
+    // Mock database for suspended users and restricted keywords
+    const restrictedKeywords = ["admin", "moderator", "test", "null", "undefined"];
+    const suspendedAccounts = ["John Doe", "Jane Admin"];
 
-    document.getElementById("currentDP").src = selectedIllustration || "https://via.placeholder.com/100/cccccc/000000?text=DP";
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+    document.getElementById("currentDP").src = currentUser.dp || "https://via.placeholder.com/100/cccccc/000000?text=DP";
     document.getElementById("name").value = currentUser.name || "";
     document.getElementById("lastName").value = currentUser.lastName || "";
     document.getElementById("mobile").value = currentUser.mobile || "";
     document.getElementById("email").value = currentUser.email || "";
 
-    function openOverlay() {
-      overlay.style.display = "flex";
-      loadIllustrations();
-    }
-
-    function closeOverlay() {
-      overlay.style.display = "none";
-    }
-
-    function loadIllustrations() {
-      illustrationContainer.innerHTML = "";
-      illustrationImages.forEach((imgData) => {
-        const img = document.createElement("img");
-        img.src = imgData.url;
-        img.alt = imgData.keywords.join(", ");
-        img.onclick = () => selectIllustration(imgData.url, img);
-        if (imgData.url === selectedIllustration) img.classList.add("selected");
-        illustrationContainer.appendChild(img);
-      });
-    }
-
-    function selectIllustration(url, img) {
-      selectedIllustration = url;
-      document.querySelectorAll(".illustrations img").forEach((el) => el.classList.remove("selected"));
-      img.classList.add("selected");
-    }
-
-    function filterIllustrations() {
-      const query = document.getElementById("search").value.toLowerCase();
-      document.querySelectorAll(".illustrations img").forEach((img) => {
-        const keywords = img.alt.toLowerCase();
-        img.style.display = keywords.includes(query) ? "block" : "none";
-      });
-    }
-
     function saveProfile() {
-      const uploadedFile = document.getElementById("uploadDP").files[0];
-      if (uploadedFile) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          currentUser.dp = e.target.result;
-          updateUser();
-        };
-        reader.readAsDataURL(uploadedFile);
-      } else {
-        currentUser.dp = selectedIllustration;
-        updateUser();
+      const message = document.getElementById("message");
+      const firstName = document.getElementById("name").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+
+      // Check for restricted keywords
+      if (restrictedKeywords.some((word) => firstName.toLowerCase().includes(word) || lastName.toLowerCase().includes(word))) {
+        message.innerHTML = `<div class="error-message">Error: Your name contains restricted keywords.</div>`;
+        return;
       }
+
+      // Check for suspended accounts
+      const fullName = `${firstName} ${lastName}`;
+      if (suspendedAccounts.includes(fullName)) {
+        message.innerHTML = `<div class="error-message">Your account is suspended.</div>`;
+        return;
+      }
+
+      // Save profile changes
+      currentUser.name = firstName;
+      currentUser.lastName = lastName;
+      currentUser.mobile = document.getElementById("mobile").value.trim();
+      currentUser.email = document.getElementById("email").value.trim();
 
       const newPassword = document.getElementById("password").value.trim();
       if (newPassword) currentUser.password = newPassword;
-    }
 
-    function updateUser() {
-      currentUser.name = document.getElementById("name").value.trim();
-      currentUser.lastName = document.getElementById("lastName").value.trim();
-      currentUser.mobile = document.getElementById("mobile").value.trim();
-      currentUser.email = document.getElementById("email").value.trim();
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      document.getElementById("currentDP").src = currentUser.dp || "https://via.placeholder.com/100/cccccc/000000?text=DP";
-      closeOverlay();
+
+      message.innerHTML = `<div class="success-message">Profile updated successfully!</div>`;
     }
   </script>
 </body>
