@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memories</title>
+  <link rel="stylesheet" href="./photo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header>
+      <h1>Memories</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+      <!-- Home Section -->
+      <section id="homeSection" class="section active">
+        <h2>Recent Photos</h2>
+        <div id="gallery" class="gallery"></div>
+      </section>
+
+      <!-- Search Section -->
+      <section id="searchSection" class="section">
+        <h2>Search Photos</h2>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search by title...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div id="searchResults" class="gallery"></div>
+      </section>
+
+      <!-- Albums Section -->
+      <section id="albumsSection" class="section">
+        <h2>Your Albums</h2>
+        <div id="albums" class="albums"></div>
+        <button id="createAlbumBtn"><i class="fas fa-plus"></i> Create Album</button>
+        <div id="albumGallery" class="gallery"></div>
+      </section>
+    </div>
+
+    <!-- Upload Button -->
+    <div class="upload-area">
+      <input type="file" id="fileInput" accept="image/*" multiple>
+      <label for="fileInput"><i class="fas fa-plus"></i></label>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+      <button data-section="homeSection"><i class="fas fa-home"></i> Home</button>
+      <button data-section="searchSection"><i class="fas fa-search"></i> Search</button>
+      <button data-section="albumsSection"><i class="fas fa-folder"></i> Albums</button>
+    </nav>
+
+    <!-- Fullscreen Modal -->
+    <div id="modal" class="modal">
+      <span id="closeModal" class="close">&times;</span>
+      <img id="modalImg" src="" alt="Image">
+      <div class="modal-caption">
+        <input type="text" id="renameInput" placeholder="Rename image...">
+        <button id="renameBtn"><i class="fas fa-save"></i> Save</button>
+        <button id="deleteBtn"><i class="fas fa-trash"></i> Delete</button>
+        <button id="addToAlbumBtn"><i class="fas fa-folder-plus"></i> Add to Album</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./photo.js"></script>
+</body>
+</html>
