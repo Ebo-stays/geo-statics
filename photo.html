@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Library</title>
-  <link rel="stylesheet" href="photo.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="header">
     <h1>Photo Library</h1>
     <div class="actions">
-      <button class="select-button" id="createAlbumButton">Create Album</button>
-      <input type="search" class="search-bar" id="searchInput" placeholder="Search Albums or People">
+      <button id="createAlbumButton" class="select-button">Create Album</button>
+      <input type="search" id="searchInput" class="search-bar" placeholder="Search Albums or People">
     </div>
   </header>
 
@@ -20,11 +20,11 @@
     <section id="albumsSection">
       <h2>Albums</h2>
       <div id="albumsGrid" class="photo-grid">
-        <!-- Albums will be dynamically generated here -->
+        <!-- Albums dynamically populated here -->
       </div>
     </section>
 
-    <!-- Modal for Creating Albums -->
+    <!-- Modals -->
     <div id="albumModal" class="modal">
       <div class="modal-content">
         <h3>Create New Album</h3>
@@ -35,15 +35,23 @@
       </div>
     </div>
 
-    <!-- Modal for Zooming Images -->
     <div id="imageModal" class="modal">
       <div class="modal-content">
         <span id="closeImageModal" class="close">&times;</span>
         <img id="zoomedImage" src="" alt="Zoomed Image">
       </div>
     </div>
+
+    <div id="uploadModal" class="modal">
+      <div class="modal-content">
+        <h3>Upload Media</h3>
+        <input type="file" id="mediaUploadInput" accept="image/*,video/*" multiple>
+        <button id="uploadMediaButton">Upload</button>
+        <button id="cancelUploadButton">Cancel</button>
+      </div>
+    </div>
   </main>
 
-  <script src="photo.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
