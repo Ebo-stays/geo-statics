@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Library</title>
+  <link rel="stylesheet" href="photo.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Photo Library</h1>
+    <div class="actions">
+      <button class="select-button" id="createAlbumButton">Create Album</button>
+      <input type="search" class="search-bar" id="searchInput" placeholder="Search Albums or People">
+    </div>
+  </header>
+
+  <main>
+    <!-- Albums Section -->
+    <section id="albumsSection">
+      <h2>Albums</h2>
+      <div id="albumsGrid" class="photo-grid">
+        <!-- Albums will be dynamically generated here -->
+      </div>
+    </section>
+
+    <!-- Modal for Creating Albums -->
+    <div id="albumModal" class="modal">
+      <div class="modal-content">
+        <h3>Create New Album</h3>
+        <input type="text" id="albumNameInput" placeholder="Album Name">
+        <input type="text" id="peopleNameInput" placeholder="People (Comma-separated)">
+        <button id="saveAlbumButton">Save</button>
+        <button id="cancelAlbumButton">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Modal for Zooming Images -->
+    <div id="imageModal" class="modal">
+      <div class="modal-content">
+        <span id="closeImageModal" class="close">&times;</span>
+        <img id="zoomedImage" src="" alt="Zoomed Image">
+      </div>
+    </div>
+  </main>
+
+  <script src="photo.js"></script>
+</body>
+</html>
