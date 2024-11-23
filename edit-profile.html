@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
   <style>
-    /* Same styles as signup page for consistency */
+    /* Same styles as profile page for consistency */
     body {
       font-family: Arial, sans-serif;
       background-color: #f6f8fc;
@@ -21,11 +21,19 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       width: 400px;
+      text-align: center;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
     }
     h2 {
-      text-align: center;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     form {
       display: flex;
@@ -59,6 +67,7 @@
 </head>
 <body>
   <div class="container">
+    <img id="previewDp" src="default-dp.png" alt="Profile Picture">
     <h2>Edit Profile</h2>
     <form id="editForm">
       <label for="firstName">First Name</label>
@@ -83,45 +92,48 @@
       <input type="text" id="address">
 
       <label for="dp">Profile Picture URL</label>
-      <input type="url" id="dp" placeholder="Enter image URL (optional)">
-
+      <input type="url" id="dp" placeholder="Enter image URL">
+      
       <button type="submit">Save Changes</button>
     </form>
   </div>
 
   <script>
     const editForm = document.getElementById("editForm");
-    const profileData = JSON.parse(localStorage.getItem("userProfile"));
+    const previewDp = document.getElementById("previewDp");
 
-    if (!profileData) {
-      alert("No profile found! Redirecting to signup...");
+    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (userProfile) {
+      // Pre-fill form with existing data
+      document.getElementById("firstName").value = userProfile.firstName;
+      document.getElementById("lastName").value = userProfile.lastName;
+      document.getElementById("email").value = userProfile.email;
+      document.getElementById("creditCard").value = userProfile.creditCard;
+      document.getElementById("dob").value = userProfile.dob;
+      document.getElementById("upiId").value = userProfile.upiId;
+      document.getElementById("address").value = userProfile.address;
+      document.getElementById("dp").value = userProfile.dp;
+      previewDp.src = userProfile.dp || "default-dp.png";
+    } else {
+      alert("No profile found. Redirecting to signup...");
       window.location.href = "signup.html";
     }
-
-    // Pre-fill the form with existing data
-    document.getElementById("firstName").value = profileData.firstName;
-    document.getElementById("lastName").value = profileData.lastName;
-    document.getElementById("email").value = profileData.email;
-    document.getElementById("creditCard").value = profileData.creditCard;
-    document.getElementById("dob").value = profileData.dob;
-    document.getElementById("upiId").value = profileData.upiId;
-    document.getElementById("address").value = profileData.address;
-    document.getElementById("dp").value = profileData.dp;
 
     // Save updated data
     editForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      profileData.firstName = document.getElementById("firstName").value;
-      profileData.lastName = document.getElementById("lastName").value;
-      profileData.email = document.getElementById("email").value;
-      profileData.creditCard = document.getElementById("creditCard").value;
-      profileData.dob = document.getElementById("dob").value;
-      profileData.upiId = document.getElementById("upiId").value;
-      profileData.address = document.getElementById("address").value;
-      profileData.dp = document.getElementById("dp").value;
+      userProfile.firstName = document.getElementById("firstName").value;
+      userProfile.lastName = document.getElementById("lastName").value;
+      userProfile.email = document.getElementById("email").value;
+      userProfile.creditCard = document.getElementById("creditCard").value;
+      userProfile.dob = document.getElementById("dob").value;
+      userProfile.upiId = document.getElementById("upiId").value;
+      userProfile.address = document.getElementById("address").value;
+      userProfile.dp = document.getElementById("dp").value;
 
-      localStorage.setItem("userProfile", JSON.stringify(profileData));
+      localStorage.setItem("userProfile", JSON.stringify(userProfile));
       alert("Profile updated successfully!");
       window.location.href = "profile.html";
     });
