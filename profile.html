@@ -3,83 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
+  <title>Profile</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #f6f8fc;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
     }
-    .profile-container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
+    .container {
+      background: white;
       padding: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       width: 400px;
     }
-    .dp {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      background-color: #f0f0f0;
-      overflow: hidden;
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
     }
-    .dp img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .info {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #555;
     }
-    .details {
-      font-size: 18px;
-      line-height: 1.6;
+    .info strong {
       color: #333;
     }
-    .logout-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #6a00dc;
-      color: white;
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
       font-weight: bold;
+      color: white;
+      background-color: #1a73e8;
       border: none;
       border-radius: 8px;
       cursor: pointer;
     }
-    .logout-btn:hover {
-      background-color: #5300a8;
+    button:hover {
+      background-color: #155ab6;
     }
   </style>
 </head>
 <body>
-  <div class="profile-container">
-    <div class="dp" id="dpContainer"></div>
-    <h2 id="name"></h2>
-    <p class="details" id="email"></p>
-    <p class="details" id="mobile"></p>
-    <p class="details" id="id"></p>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+  <div class="container">
+    <h2>Your Profile</h2>
+    <div class="info" id="profileInfo"></div>
+    <button onclick="editProfile()">Edit Profile</button>
   </div>
+
   <script>
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    if (!user) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("dpContainer").innerHTML = `<img src="${user.dp}" alt="Profile Picture" />`;
-      document.getElementById("name").textContent = `${user.firstName} ${user.lastName}`;
-      document.getElementById("email").textContent = `Email: ${user.email}`;
-      document.getElementById("mobile").textContent = `Mobile: ${user.mobile}`;
-      document.getElementById("id").textContent = `Apple ID: ${user.id}`;
+    const profileData = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (!profileData) {
+      alert("No profile found! Redirecting to signup...");
+      window.location.href = "signup.html";
     }
 
-    function logout() {
-      localStorage.removeItem("currentUser");
-      window.location.href = "index.html";
+    // Display profile information
+    const profileInfo = document.getElementById("profileInfo");
+    function displayProfile() {
+      profileInfo.innerHTML = `
+        <p><strong>First Name:</strong> ${profileData.firstName}</p>
+        <p><strong>Last Name:</strong> ${profileData.lastName}</p>
+        <p><strong>Email:</strong> ${profileData.email}</p>
+        <p><strong>Credit Card:</strong> ${profileData.creditCard}</p>
+        <p><strong>Date of Birth:</strong> ${profileData.dob}</p>
+        <p><strong>UPI ID:</strong> ${profileData.upiId}</p>
+        <p><strong>Home Address:</strong> ${profileData.address}</p>
+      `;
+    }
+    displayProfile();
+
+    function editProfile() {
+      const newFirstName = prompt("Enter new First Name:", profileData.firstName);
+      const newLastName = prompt("Enter new Last Name:", profileData.lastName);
+      const newEmail = prompt("Enter new Email:", profileData.email);
+      const newCreditCard = prompt("Enter new Credit Card:", profileData.creditCard);
+      const newDob = prompt("Enter new Date of Birth:", profileData.dob);
+      const newUpiId = prompt("Enter new UPI ID:", profileData.upiId);
+      const newAddress = prompt("Enter new Home Address:", profileData.address);
+
+      // Update profile data
+      profileData.firstName = newFirstName || profileData.firstName;
+      profileData.lastName = newLastName || profileData.lastName;
+      profileData.email = newEmail || profileData.email;
+      profileData.creditCard = newCreditCard || profileData.creditCard;
+      profileData.dob = newDob || profileData.dob;
+      profileData.upiId = newUpiId || profileData.upiId;
+      profileData.address = newAddress || profileData.address;
+
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+      displayProfile();
     }
   </script>
 </body>
