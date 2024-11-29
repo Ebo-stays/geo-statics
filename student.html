@@ -3,69 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>School ERP - Student</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Student Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #444;
+    }
+    .form-group {
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .form-group input {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .student-details {
+      background: #eee;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <div id="student-section">
+  <div class="container">
     <h1>Student Portal</h1>
-    <div id="student-login">
-      <h2>Student Login</h2>
-      <input type="text" id="student-id" placeholder="Enter Mobile Number or Roll Number">
-      <button onclick="loginStudent()">Login</button>
+    <h2>Welcome, <span id="student-name"></span></h2>
+
+    <div class="student-details">
+      <h3>Student Information</h3>
+      <p><strong>Name:</strong> <span id="student-name-details"></span></p>
+      <p><strong>Roll No:</strong> <span id="student-rollno"></span></p>
+      <p><strong>Class:</strong> <span id="student-class"></span></p>
+      <p><strong>Section:</strong> <span id="student-section"></span></p>
+      <p><strong>Father's Name:</strong> <span id="student-father-name"></span></p>
+      <p><strong>Mother's Name:</strong> <span id="student-mother-name"></span></p>
+      <p><strong>Address:</strong> <span id="student-address"></span></p>
     </div>
 
-    <div id="student-dashboard" style="display: none;">
-      <h2>Welcome, <span id="student-name"></span></h2>
-      <h3>Messages from Teacher:</h3>
-      <ul id="messages-list"></ul>
-      <button onclick="logoutStudent()">Logout</button>
-    </div>
+    <h3>Send PDF</h3>
+    <input type="file" id="send-pdf" accept=".pdf">
+    <button onclick="sendPDF()">Send PDF</button>
+
+    <button onclick="logoutStudent()">Logout</button>
   </div>
 
   <script>
-    // Load student and teacher data from localStorage
     const students = JSON.parse(localStorage.getItem('students')) || {};
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
 
-    // Login a student
-    function loginStudent() {
-      const studentId = document.getElementById('student-id').value.trim();
-      const student = Object.values(students).find(
-        (s) => s.rollNo === studentId || s.mobile === studentId
-      );
-
-      if (student) {
-        // Display dashboard
-        document.getElementById('student-login').style.display = 'none';
-        document.getElementById('student-dashboard').style.display = 'block';
+    // Fetch Student Data from LocalStorage
+    function getStudentDetails() {
+      const mobile = prompt("Enter your mobile number to login");
+      if (students[mobile]) {
+        const student = students[mobile];
         document.getElementById('student-name').textContent = student.name;
-        displayMessages();
+        document.getElementById('student-name-details').textContent = student.name;
+        document.getElementById('student-rollno').textContent = student.rollNo;
+        document.getElementById('student-class').textContent = student.class;
+        document.getElementById('student-section').textContent = student.section;
+        document.getElementById('student-father-name').textContent = student.fatherName;
+        document.getElementById('student-mother-name').textContent = student.motherName;
+        document.getElementById('student-address').textContent = student.address;
       } else {
-        alert('Invalid Roll Number or Mobile Number!');
+        alert('Invalid mobile number');
       }
     }
 
-    // Display messages sent by the teacher
-    function displayMessages() {
-      const messagesList = document.getElementById('messages-list');
-      messagesList.innerHTML = '';
-
-      if (messages.length > 0) {
-        messages.forEach((msg) => {
-          const li = document.createElement('li');
-          li.textContent = `${msg.type === 'text' ? msg.content : '[Media]'} - ${msg.timestamp}`;
-          messagesList.appendChild(li);
-        });
+    function sendPDF() {
+      const file = document.getElementById('send-pdf').files[0];
+      if (file && file.type === 'application/pdf') {
+        alert('PDF Sent Successfully');
       } else {
-        messagesList.textContent = 'No messages from the teacher yet.';
+        alert('Please select a valid PDF file');
       }
     }
 
-    // Logout student
     function logoutStudent() {
       location.reload();
     }
+
+    // Call getStudentDetails when the page loads
+    window.onload = getStudentDetails;
   </script>
 </body>
 </html>
