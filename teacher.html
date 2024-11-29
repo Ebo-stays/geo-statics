@@ -32,7 +32,7 @@
       gap: 10px;
     }
 
-    input, button, select, textarea {
+    input, button {
       width: 100%;
       padding: 10px;
       margin: 5px 0;
@@ -51,20 +51,6 @@
 
     button:hover {
       background-color: #1b4332;
-    }
-
-    .profile-picture {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .profile-picture img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #ccc;
     }
 
     .hidden {
@@ -101,6 +87,7 @@
 <body>
   <div class="container">
     <h1>Teacher Portal</h1>
+
     <div id="signup-section" class="hidden">
       <h2>Sign Up</h2>
       <form id="signup-form">
@@ -212,7 +199,7 @@
         populateStudentSelect();
         populateStudentList();
         alert ("Welcome Teacher!");
-              } else {
+      } else {
         alert("Invalid credentials!");
       }
     }
