@@ -7,116 +7,132 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
     }
+
     .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
-    h1, h2 {
+
+    h1 {
       text-align: center;
-      color: #444;
+      color: #2d6a4f;
     }
-    .form-group {
-      margin: 1rem 0;
-      display: flex;
-      flex-direction: column;
+
+    h2 {
+      color: #1b4332;
     }
-    .form-group label {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-    .form-group input {
-      padding: 0.8rem;
-      font-size: 1rem;
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 14px;
     }
+
     button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      background-color: #4caf50;
-      color: white;
+      background-color: #2d6a4f;
+      color: #ffffff;
       border: none;
-      border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
     }
+
     button:hover {
-      background-color: #45a049;
+      background-color: #1b4332;
     }
-    .student-details {
-      background: #eee;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 4px;
+
+    .hidden {
+      display: none;
+    }
+
+    .details, .messages {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .details h3, .messages h3 {
+      color: #2d6a4f;
+    }
+
+    .message-item {
+      background: #e9f5f2;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Student Portal</h1>
-    <h2>Welcome, <span id="student-name"></span></h2>
-
-    <div class="student-details">
-      <h3>Student Information</h3>
-      <p><strong>Name:</strong> <span id="student-name-details"></span></p>
-      <p><strong>Roll No:</strong> <span id="student-rollno"></span></p>
-      <p><strong>Class:</strong> <span id="student-class"></span></p>
-      <p><strong>Section:</strong> <span id="student-section"></span></p>
-      <p><strong>Father's Name:</strong> <span id="student-father-name"></span></p>
-      <p><strong>Mother's Name:</strong> <span id="student-mother-name"></span></p>
-      <p><strong>Address:</strong> <span id="student-address"></span></p>
+    <div id="login-section">
+      <h2>Login</h2>
+      <input type="text" id="student-login" placeholder="Enter Mobile Number or Roll Number">
+      <button onclick="studentLogin()">Login</button>
     </div>
 
-    <h3>Send PDF</h3>
-    <input type="file" id="send-pdf" accept=".pdf">
-    <button onclick="sendPDF()">Send PDF</button>
+    <div id="dashboard-section" class="hidden">
+      <div class="details">
+        <h3>Student Details</h3>
+        <p><strong>Name:</strong> <span id="student-name"></span></p>
+        <p><strong>Roll No:</strong> <span id="student-roll"></span></p>
+        <p><strong>Father's Name:</strong> <span id="father-name"></span></p>
+        <p><strong>Address:</strong> <span id="student-address"></span></p>
+        <p><strong>Class:</strong> <span id="class-name"></span></p>
+        <p><strong>Section:</strong> <span id="section-name"></span></p>
+      </div>
 
-    <button onclick="logoutStudent()">Logout</button>
+      <div class="messages">
+        <h3>Messages</h3>
+        <div id="message-list"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const students = JSON.parse(localStorage.getItem('students')) || {};
+    const students = JSON.parse(localStorage.getItem("students")) || [];
 
-    // Fetch Student Data from LocalStorage
-    function getStudentDetails() {
-      const mobile = prompt("Enter your mobile number to login");
-      if (students[mobile]) {
-        const student = students[mobile];
-        document.getElementById('student-name').textContent = student.name;
-        document.getElementById('student-name-details').textContent = student.name;
-        document.getElementById('student-rollno').textContent = student.rollNo;
-        document.getElementById('student-class').textContent = student.class;
-        document.getElementById('student-section').textContent = student.section;
-        document.getElementById('student-father-name').textContent = student.fatherName;
-        document.getElementById('student-mother-name').textContent = student.motherName;
-        document.getElementById('student-address').textContent = student.address;
+    function studentLogin() {
+      const loginValue = document.getElementById("student-login").value;
+      const student = students.find(
+        (s) => s.mobile === loginValue || s.rollNo === loginValue
+      );
+
+      if (student) {
+        document.getElementById("login-section").classList.add("hidden");
+        document.getElementById("dashboard-section").classList.remove("hidden");
+        displayStudentDetails(student);
       } else {
-        alert('Invalid mobile number');
+        alert("Student not found!");
       }
     }
 
-    function sendPDF() {
-      const file = document.getElementById('send-pdf').files[0];
-      if (file && file.type === 'application/pdf') {
-        alert('PDF Sent Successfully');
-      } else {
-        alert('Please select a valid PDF file');
-      }
-    }
+    function displayStudentDetails(student) {
+      document.getElementById("student-name").textContent = student.name;
+      document.getElementById("student-roll").textContent = student.rollNo;
+      document.getElementById("father-name").textContent = student.fatherName;
+      document.getElementById("student-address").textContent = student.address;
+      document.getElementById("class-name").textContent = student.className;
+      document.getElementById("section-name").textContent = student.section;
 
-    function logoutStudent() {
-      location.reload();
+      const messageList = document.getElementById("message-list");
+      messageList.innerHTML = student.messages
+        .map((message) => `<div class="message-item">${message}</div>`)
+        .join("");
     }
-
-    // Call getStudentDetails when the page loads
-    window.onload = getStudentDetails;
   </script>
 </body>
 </html>
