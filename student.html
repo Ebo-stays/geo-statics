@@ -8,69 +8,59 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
-      color: #333;
       margin: 0;
       padding: 0;
     }
 
     .container {
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 20px;
-      background: #ffffff;
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
       color: #2d6a4f;
     }
 
-    h2 {
-      color: #1b4332;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     input, button {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px 0;
       border-radius: 5px;
+      border: 1px solid #ccc;
       font-size: 14px;
     }
 
     button {
       background-color: #2d6a4f;
-      color: #ffffff;
+      color: white;
+      font-size: 16px;
       border: none;
       cursor: pointer;
-      font-size: 16px;
     }
 
     button:hover {
       background-color: #1b4332;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .details, .messages {
+    .message-box {
       margin-top: 20px;
-      padding: 10px;
+    }
+
+    .message-box div {
       background: #f1f1f1;
-      border-radius: 5px;
-    }
-
-    .details h3, .messages h3 {
-      color: #2d6a4f;
-    }
-
-    .message-item {
-      background: #e9f5f2;
-      margin: 10px 0;
       padding: 10px;
+      margin: 5px 0;
       border-radius: 5px;
     }
   </style>
@@ -78,27 +68,21 @@
 <body>
   <div class="container">
     <h1>Student Portal</h1>
+
     <div id="login-section">
       <h2>Login</h2>
-      <input type="text" id="student-login" placeholder="Enter Mobile Number or Roll Number">
-      <button onclick="studentLogin()">Login</button>
+      <form id="login-form">
+        <input type="text" id="student-login" placeholder="Roll No or Mobile Number" required>
+        <button type="button" onclick="studentLogin()">Login</button>
+      </form>
     </div>
 
-    <div id="dashboard-section" class="hidden">
-      <div class="details">
-        <h3>Student Details</h3>
-        <p><strong>Name:</strong> <span id="student-name"></span></p>
-        <p><strong>Roll No:</strong> <span id="student-roll"></span></p>
-        <p><strong>Father's Name:</strong> <span id="father-name"></span></p>
-        <p><strong>Address:</strong> <span id="student-address"></span></p>
-        <p><strong>Class:</strong> <span id="class-name"></span></p>
-        <p><strong>Section:</strong> <span id="section-name"></span></p>
-      </div>
+    <div id="main-section" class="hidden">
+      <h2>Welcome, <span id="student-name-display"></span></h2>
+      <h3>Class: <span id="student-class-display"></span></h3>
 
-      <div class="messages">
-        <h3>Messages</h3>
-        <div id="message-list"></div>
-      </div>
+      <h2>Messages</h2>
+      <div id="message-box"></div>
     </div>
   </div>
 
@@ -113,25 +97,26 @@
 
       if (student) {
         document.getElementById("login-section").classList.add("hidden");
-        document.getElementById("dashboard-section").classList.remove("hidden");
-        displayStudentDetails(student);
+        document.getElementById("main-section").classList.remove("hidden");
+        document.getElementById("student-name-display").innerText = student.name;
+        document.getElementById("student-class-display").innerText =
+          `${student.className} - ${student.section}`;
+
+        populateMessages(student);
       } else {
         alert("Student not found!");
       }
     }
 
-    function displayStudentDetails(student) {
-      document.getElementById("student-name").textContent = student.name;
-      document.getElementById("student-roll").textContent = student.rollNo;
-      document.getElementById("father-name").textContent = student.fatherName;
-      document.getElementById("student-address").textContent = student.address;
-      document.getElementById("class-name").textContent = student.className;
-      document.getElementById("section-name").textContent = student.section;
-
-      const messageList = document.getElementById("message-list");
-      messageList.innerHTML = student.messages
-        .map((message) => `<div class="message-item">${message}</div>`)
-        .join("");
+    function populateMessages(student) {
+      const messageBox = document.getElementById("message-box");
+      if (student.messages.length > 0) {
+        messageBox.innerHTML = student.messages
+          .map((message) => `<div>${message}</div>`)
+          .join("");
+      } else {
+        messageBox.innerHTML = "<div>No messages yet.</div>";
+      }
     }
   </script>
 </body>
