@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>School ERP - Teacher</title>
+  <title>Teacher Portal</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
       margin-bottom: 0.5rem;
       font-weight: bold;
     }
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group select {
       padding: 0.8rem;
       font-size: 1rem;
       border: 1px solid #ccc;
@@ -50,217 +50,241 @@
     button:hover {
       background-color: #45a049;
     }
-    #teacher-dashboard, #add-student-form {
-      display: none;
-    }
-    #student-list {
+    .student-list, .message-list {
       list-style-type: none;
       padding: 0;
     }
-    #student-list li {
-      background: #eee;
-      margin: 0.5rem 0;
-      padding: 0.8rem;
+    .message-box {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ccc;
       border-radius: 4px;
+      background: #f9f9f9;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="teacher-container">
     <h1>Teacher Portal</h1>
 
-    <!-- Teacher Login Section -->
-    <div id="teacher-login">
+    <div id="login-form">
       <h2>Login</h2>
       <div class="form-group">
-        <label for="teacher-mobile">Mobile Number</label>
-        <input type="text" id="teacher-mobile" placeholder="Enter Mobile Number">
+        <label for="teacher-mobile">Mobile Number:</label>
+        <input type="text" id="teacher-mobile" placeholder="Enter your mobile number" required>
       </div>
-      <button onclick="checkTeacher()">Next</button>
-
-      <div id="login-form" style="display: none;">
-        <div class="form-group">
-          <label for="teacher-password">Password</label>
-          <input type="password" id="teacher-password" placeholder="Enter Password">
-        </div>
-        <button onclick="loginTeacher()">Login</button>
+      <div class="form-group">
+        <label for="teacher-password">Password:</label>
+        <input type="password" id="teacher-password" placeholder="Enter your password" required>
       </div>
-
-      <!-- Teacher Signup Form -->
-      <div id="signup-form" style="display: none;">
-        <h3>Sign Up</h3>
-        <div class="form-group">
-          <label for="teacher-full-name">Full Name</label>
-          <input type="text" id="teacher-full-name" placeholder="Enter Full Name">
-        </div>
-        <div class="form-group">
-          <label for="teacher-email">Email</label>
-          <input type="email" id="teacher-email" placeholder="Enter Email">
-        </div>
-        <div class="form-group">
-          <label for="teacher-dob">Date of Birth</label>
-          <input type="date" id="teacher-dob">
-        </div>
-        <div class="form-group">
-          <label for="teacher-degree">Degree</label>
-          <input type="text" id="teacher-degree" placeholder="Enter Degree">
-        </div>
-        <div class="form-group">
-          <label for="teacher-level">Teaching Level</label>
-          <input type="text" id="teacher-level" placeholder="e.g., Primary, Secondary">
-        </div>
-        <div class="form-group">
-          <label for="teacher-subject">Subject</label>
-          <input type="text" id="teacher-subject" placeholder="Enter Subject">
-        </div>
-        <div class="form-group">
-          <label for="teacher-class">Class</label>
-          <input type="text" id="teacher-class" placeholder="Enter Class">
-        </div>
-        <div class="form-group">
-          <label for="teacher-experience">Experience (Years)</label>
-          <input type="number" id="teacher-experience" placeholder="Enter Years of Experience">
-        </div>
-        <div class="form-group">
-          <label for="teacher-password">Password</label>
-          <input type="password" id="teacher-signup-password" placeholder="Create Password">
-        </div>
-        <button onclick="registerTeacher()">Sign Up</button>
-      </div>
+      <button onclick="loginTeacher()">Login</button>
+      <p>Don't have an account? <a href="javascript:void(0)" onclick="showSignupForm()">Sign up</a></p>
     </div>
 
-    <!-- Teacher Dashboard -->
-    <div id="teacher-dashboard">
-      <h2>Welcome, <span id="teacher-name"></span></h2>
-      <button onclick="logoutTeacher()">Logout</button>
-      <h3>Manage Students</h3>
-      <button onclick="showAddStudentForm()">Add Student</button>
-      <div id="add-student-form">
-        <h3>Add New Student</h3>
-        <div class="form-group">
-          <label for="student-photo">Student Photo</label>
-          <input type="file" id="student-photo">
-        </div>
-        <div class="form-group">
-          <label for="student-mobile">Mobile Number</label>
-          <input type="text" id="student-mobile" placeholder="Enter Mobile Number">
-        </div>
-        <div class="form-group">
-          <label for="student-password">Password</label>
-          <input type="password" id="student-password" placeholder="Create Password">
-        </div>
-        <div class="form-group">
-          <label for="student-address">Address (House)</label>
-          <input type="text" id="student-address" placeholder="Enter Address (House)">
-        </div>
-        <div class="form-group">
-          <label for="student-name">Student Name</label>
-          <input type="text" id="student-name" placeholder="Enter Student Name">
-        </div>
-        <div class="form-group">
-          <label for="father-name">Father's Name</label>
-          <input type="text" id="father-name" placeholder="Enter Father's Name">
-        </div>
-        <div class="form-group">
-          <label for="mother-name">Mother's Name</label>
-          <input type="text" id="mother-name" placeholder="Enter Mother's Name">
-        </div>
-        <div class="form-group">
-          <label for="student-class">Class</label>
-          <input type="text" id="student-class" placeholder="Enter Class">
-        </div>
-        <div class="form-group">
-          <label for="student-section">Section</label>
-          <input type="text" id="student-section" placeholder="Enter Section">
-        </div>
-        <div class="form-group">
-          <label for="roll-no">Roll Number</label>
-          <input type="number" id="roll-no" placeholder="Enter Roll Number">
-        </div>
-        <button onclick="addStudent()">Add Student</button>
+    <div id="signup-form" style="display:none;">
+      <h2>Teacher Signup</h2>
+      <div class="form-group">
+        <label for="teacher-signup-mobile">Mobile Number:</label>
+        <input type="text" id="teacher-signup-mobile" placeholder="Enter your mobile number" required>
       </div>
+      <div class="form-group">
+        <label for="teacher-signup-password">Password:</label>
+        <input type="password" id="teacher-signup-password" placeholder="Enter your password" required>
+      </div>
+      <div class="form-group">
+        <label for="teacher-name">Name:</label>
+        <input type="text" id="teacher-name" placeholder="Enter your name" required>
+      </div>
+      <button onclick="signupTeacher()">Sign Up</button>
+      <p>Already have an account? <a href="javascript:void(0)" onclick="showLoginForm()">Login</a></p>
+    </div>
 
-      <!-- Student List -->
+    <div id="teacher-dashboard" style="display:none;">
+      <h2>Welcome, <span id="teacher-name-display"></span></h2>
+      <button onclick="logoutTeacher()">Logout</button>
+
+      <h3>Add Student</h3>
+      <div class="form-group">
+        <label for="student-rollno">Roll No:</label>
+        <input type="text" id="student-rollno" placeholder="Enter student roll number" required>
+      </div>
+      <div class="form-group">
+        <label for="student-name">Name:</label>
+        <input type="text" id="student-name" placeholder="Enter student name" required>
+      </div>
+      <div class="form-group">
+        <label for="student-class">Class:</label>
+        <input type="text" id="student-class" placeholder="Enter class" required>
+      </div>
+      <button onclick="addStudent()">Add Student</button>
+
       <h3>Student List</h3>
-      <ul id="student-list"></ul>
+      <ul id="student-list" class="student-list"></ul>
+
+      <h3>Send Message to Student</h3>
+      <div class="form-group">
+        <label for="message-rollno">Select Student Roll No:</label>
+        <select id="message-rollno"></select>
+      </div>
+      <div class="form-group">
+        <label for="message-content">Message:</label>
+        <textarea id="message-content" rows="4" placeholder="Enter your message"></textarea>
+      </div>
+      <button onclick="sendMessage()">Send Message</button>
+
+      <h3>Messages</h3>
+      <ul id="message-list" class="message-list"></ul>
     </div>
   </div>
 
   <script>
-    const teachers = JSON.parse(localStorage.getItem('teachers')) || {};
-    const students = JSON.parse(localStorage.getItem('students')) || {};
+    let teachers = JSON.parse(localStorage.getItem('teachers')) || {};
+    let students = JSON.parse(localStorage.getItem('students')) || {};
 
-    // Teacher Login/Signup Functions
-    function checkTeacher() {
-      const mobile = document.getElementById('teacher-mobile').value.trim();
-      if (teachers[mobile]) {
-        document.getElementById('login-form').style.display = 'block';
-        document.getElementById('signup-form').style.display = 'none';
-      } else {
-        document.getElementById('signup-form').style.display = 'block';
-        document.getElementById('login-form').style.display = 'none';
-      }
+    // Show the login form
+    function showLoginForm() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
     }
 
+    // Show the signup form
+    function showSignupForm() {
+      document.getElementById('signup-form').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+    }
+
+    // Handle teacher login
     function loginTeacher() {
       const mobile = document.getElementById('teacher-mobile').value.trim();
       const password = document.getElementById('teacher-password').value.trim();
       if (teachers[mobile] && teachers[mobile].password === password) {
-        document.getElementById('teacher-login').style.display = 'none';
-        document.getElementById('teacher-dashboard').style.display = 'block';
-        document.getElementById('teacher-name').textContent = teachers[mobile].name;
+        localStorage.setItem('loggedInTeacher', mobile);
+        showTeacherDashboard(mobile);
       } else {
-        alert('Invalid credentials!');
+        alert('Invalid credentials. Please try again.');
       }
     }
 
-    function registerTeacher() {
-      const mobile = document.getElementById('teacher-mobile').value.trim();
-      teachers[mobile] = {
-        name: document.getElementById('teacher-full-name').value,
-        email: document.getElementById('teacher-email').value,
-        dob: document.getElementById('teacher-dob').value,
-        degree: document.getElementById('teacher-degree').value,
-        level: document.getElementById('teacher-level').value,
-        subject: document.getElementById('teacher-subject').value,
-        class: document.getElementById('teacher-class').value,
-        experience: document.getElementById('teacher-experience').value,
-        password: document.getElementById('teacher-signup-password').value,
-      };
-      localStorage.setItem('teachers', JSON.stringify(teachers));
-      alert('Teacher registered successfully!');
+    // Handle teacher signup
+    function signupTeacher() {
+      const mobile = document.getElementById('teacher-signup-mobile').value.trim();
+      const password = document.getElementById('teacher-signup-password').value.trim();
+      const name = document.getElementById('teacher-name').value.trim();
+      if (!teachers[mobile]) {
+        teachers[mobile] = { mobile, password, name };
+        localStorage.setItem('teachers', JSON.stringify(teachers));
+        alert('Signup successful!');
+        showLoginForm();
+      } else {
+        alert('Teacher already registered with this mobile number.');
+      }
     }
 
-    // Add Student Functions
-    function showAddStudentForm() {
-      document.getElementById('add-student-form').style.display = 'block';
+    // Show teacher dashboard after login
+    function showTeacherDashboard(mobile) {
+      const teacher = teachers[mobile];
+      document.getElementById('teacher-name-display').textContent = teacher.name;
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('teacher-dashboard').style.display = 'block';
+      loadStudentList();
+      loadMessageRollNoOptions();
     }
 
-    function addStudent() {
-      const rollNo = document.getElementById('roll-no').value.trim();
-      students[rollNo] = {
-        photo: document.getElementById('student-photo').files[0]?.name || '',
-        mobile: document.getElementById('student-mobile').value,
-        password: document.getElementById('student-password').value,
-        address: document.getElementById('student-address').value,
-        name: document.getElementById('student-name').value,
-        fatherName: document.getElementById('father-name').value,
-        motherName: document.getElementById('mother-name').value,
-        class: document.getElementById('student-class').value,
-        section: document.getElementById('student-section').value,
-        rollNo: rollNo,
-      };
-      localStorage.setItem('students', JSON.stringify(students));
-      const studentList = document.getElementById('student-list');
-      const listItem = document.createElement('li');
-      listItem.textContent = `Roll No: ${rollNo}, Name: ${students[rollNo].name}`;
-      studentList.appendChild(listItem);
-      alert('Student added successfully!');
-    }
-
+    // Handle teacher logout
     function logoutTeacher() {
-      location.reload();
+      localStorage.removeItem('loggedInTeacher');
+      document.getElementById('teacher-dashboard').style.display = 'none';
+      showLoginForm();
     }
+
+    // Add student to the list
+    function addStudent() {
+      const rollno = document.getElementById('student-rollno').value.trim();
+      const name = document.getElementById('student-name').value.trim();
+      const className = document.getElementById('student-class').value.trim();
+
+      if (!students[rollno]) {
+        students[rollno] = { rollno, name, class: className };
+        localStorage.setItem('students', JSON.stringify(students));
+        loadStudentList();
+        loadMessageRollNoOptions();
+        alert('Student added successfully!');
+      } else {
+        alert('Student with this roll number already exists.');
+      }
+    }
+
+    // Load student list to show in the dashboard
+    function loadStudentList() {
+      const studentList = document.getElementById('student-list');
+      studentList.innerHTML = '';
+      for (const rollno in students) {
+        const li = document.createElement('li');
+        li.textContent = `Roll No: ${rollno}, Name: ${students[rollno].name}`;
+        studentList.appendChild(li);
+      }
+    }
+
+    // Load roll numbers of students to be selected for message sending
+    function loadMessageRollNoOptions() {
+      const messageRollnoSelect = document.getElementById('message-rollno');
+      messageRollnoSelect.innerHTML = '';
+      for (const rollno in students) {
+        const option = document.createElement('option');
+        option.value = rollno;
+        option.textContent = `Roll No: ${rollno} - ${students[rollno].name}`;
+        messageRollnoSelect.appendChild(option);
+      }
+    }
+
+    // Send message to student
+    function sendMessage() {
+      const rollno = document.getElementById('message-rollno').value;
+      const message = document.getElementById('message-content').value.trim();
+
+      if (rollno && message) {
+        const studentMessage = {
+          rollno,
+          message,
+          timestamp: new Date().toLocaleString()
+        };
+
+        const messageList = JSON.parse(localStorage.getItem('teacherMessages')) || [];
+        messageList.push(studentMessage);
+        localStorage.setItem('teacherMessages', JSON.stringify(messageList));
+
+        loadMessages();
+        alert('Message sent successfully!');
+      } else {
+        alert('Please select a student and enter a message.');
+      }
+    }
+
+    // Load messages sent by the teacher
+    function loadMessages() {
+      const messageList = document.getElementById('message-list');
+      messageList.innerHTML = '';
+      const messages = JSON.parse(localStorage.getItem('teacherMessages')) || [];
+      messages.forEach(msg => {
+        const li = document.createElement('li');
+        li.textContent = `To Roll No: ${msg.rollno} - Message: ${msg.message} (Sent on: ${msg.timestamp})`;
+        messageList.appendChild(li);
+      });
+    }
+
+    // Check if the teacher is already logged in
+    function checkTeacherLogin() {
+      const loggedInTeacher = localStorage.getItem('loggedInTeacher');
+      if (loggedInTeacher) {
+        showTeacherDashboard(loggedInTeacher);
+      } else {
+        showLoginForm();
+      }
+    }
+
+    // Initialize the teacher portal
+    checkTeacherLogin();
   </script>
 </body>
 </html>
