@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School ERP - Student</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="student-section">
+    <h1>Student Portal</h1>
+    <div id="student-login">
+      <h2>Student Login</h2>
+      <input type="text" id="student-id" placeholder="Enter Mobile Number or Roll Number">
+      <button onclick="loginStudent()">Login</button>
+    </div>
+
+    <div id="student-dashboard" style="display: none;">
+      <h2>Welcome, <span id="student-name"></span></h2>
+      <h3>Messages from Teacher:</h3>
+      <ul id="messages-list"></ul>
+      <button onclick="logoutStudent()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Load student and teacher data from localStorage
+    const students = JSON.parse(localStorage.getItem('students')) || {};
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Login a student
+    function loginStudent() {
+      const studentId = document.getElementById('student-id').value.trim();
+      const student = Object.values(students).find(
+        (s) => s.rollNo === studentId || s.mobile === studentId
+      );
+
+      if (student) {
+        // Display dashboard
+        document.getElementById('student-login').style.display = 'none';
+        document.getElementById('student-dashboard').style.display = 'block';
+        document.getElementById('student-name').textContent = student.name;
+        displayMessages();
+      } else {
+        alert('Invalid Roll Number or Mobile Number!');
+      }
+    }
+
+    // Display messages sent by the teacher
+    function displayMessages() {
+      const messagesList = document.getElementById('messages-list');
+      messagesList.innerHTML = '';
+
+      if (messages.length > 0) {
+        messages.forEach((msg) => {
+          const li = document.createElement('li');
+          li.textContent = `${msg.type === 'text' ? msg.content : '[Media]'} - ${msg.timestamp}`;
+          messagesList.appendChild(li);
+        });
+      } else {
+        messagesList.textContent = 'No messages from the teacher yet.';
+      }
+    }
+
+    // Logout student
+    function logoutStudent() {
+      location.reload();
+    }
+  </script>
+</body>
+</html>
