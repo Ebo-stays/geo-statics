@@ -8,11 +8,12 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f6f8fc;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
     }
     .container {
       background: white;
@@ -26,22 +27,30 @@
       color: #333;
       margin-bottom: 20px;
     }
-    form {
-      display: flex;
-      flex-direction: column;
+    .input-group {
+      margin-bottom: 15px;
     }
-    label {
-      font-weight: bold;
-      margin-top: 10px;
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
     }
-    input {
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: none;
+      height: 60px;
     }
     button {
-      margin-top: 20px;
+      width: 100%;
       padding: 12px;
       font-size: 16px;
       font-weight: bold;
@@ -54,61 +63,90 @@
     button:hover {
       background-color: #155ab6;
     }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Signup</h2>
-    <form id="signupForm">
+    <div class="input-group">
       <label for="firstName">First Name</label>
-      <input type="text" id="firstName" required>
-      
+      <input type="text" id="firstName" placeholder="Enter your first name">
+    </div>
+    <div class="input-group">
       <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" required>
-      
+      <input type="text" id="lastName" placeholder="Enter your last name">
+    </div>
+    <div class="input-group">
       <label for="email">Email</label>
-      <input type="email" id="email" required>
-      
-      <label for="creditCard">Class</label>
-      <input type="text" id="class" required>
-      
+      <input type="email" id="email" placeholder="Enter your email">
+    </div>
+    <div class="input-group">
+      <label for="creditCard">Credit Card Number</label>
+      <input type="text" id="creditCard" placeholder="Enter your credit card number">
+    </div>
+    <div class="input-group">
       <label for="dob">Date of Birth</label>
-      <input type="date" id="dob" required>
-      
-      <label for="upiId">father Name</label>
-      <input type="text" id="Father Name" required>
-      
+      <input type="date" id="dob">
+    </div>
+    <div class="input-group">
+      <label for="upiId">Home UPI ID</label>
+      <input type="text" id="upiId" placeholder="Enter your UPI ID">
+    </div>
+    <div class="input-group">
+      <label for="upiPassword">UPI Password</label>
+      <input type="password" id="upiPassword" placeholder="Enter your UPI password">
+    </div>
+    <div class="input-group">
       <label for="address">Home Address</label>
-      <input type="text" id="address" required>
-      
-      <label for="dp">Profile Picture URL</label>
-      <input type="url" id="dp" placeholder="Enter image URL (optional)">
-      
-      <button type="submit">proceed</button>
-    </form>
+      <textarea id="address" placeholder="Enter your home address"></textarea>
+    </div>
+    <button onclick="signup()">Signup</button>
+    <div id="message" class="error"></div>
   </div>
 
   <script>
-    const signupForm = document.getElementById("signupForm");
+    function signup() {
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const creditCard = document.getElementById("creditCard").value.trim();
+      const dob = document.getElementById("dob").value.trim();
+      const upiId = document.getElementById("upiId").value.trim();
+      const upiPassword = document.getElementById("upiPassword").value.trim();
+      const address = document.getElementById("address").value.trim();
 
-    signupForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+      const message = document.getElementById("message");
+      message.innerHTML = "";
 
-      const userProfile = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        email: document.getElementById("email").value,
-        creditCard: document.getElementById("creditCard").value,
-        dob: document.getElementById("dob").value,
-        upiId: document.getElementById("upiId").value,
-        address: document.getElementById("address").value,
-        dp: document.getElementById("dp").value || "default-dp.png", // Use default DP if none provided
+      // Validate inputs
+      if (!firstName || !lastName || !email || !creditCard || !dob || !upiId || !upiPassword || !address) {
+        message.innerHTML = "All fields are required!";
+        return;
+      }
+
+      // Save data in localStorage
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        creditCard,
+        dob,
+        upiId,
+        upiPassword, // Not displayed in the profile for security reasons
+        address,
       };
 
-      localStorage.setItem("userProfile", JSON.stringify(userProfile));
-      alert("Signup successful!");
+      localStorage.setItem("userProfile", JSON.stringify(userData));
+
+      // Redirect to profile page
       window.location.href = "profile.html";
-    });
+    }
   </script>
 </body>
 </html>

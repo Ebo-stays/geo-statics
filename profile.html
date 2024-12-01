@@ -7,81 +7,100 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #000;
+      background-color: #f6f8fc;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
     }
     .container {
-      background: black;
+      background: white;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       width: 400px;
-      text-align: center;
-    }
-    img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      border: 2px solid #ddd;
     }
     h2 {
-      color: #fff;
-      margin-bottom: 10px;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
     }
-    p {
-      margin: 5px 0;
-      color: #000;
+    .info {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    .info strong {
+      color: #333;
     }
     button {
-      margin-top: 20px;
-      padding: 10px 15px;
+      width: 100%;
+      padding: 12px;
       font-size: 16px;
       font-weight: bold;
       color: white;
-      background-color: #000;
+      background-color: #1a73e8;
       border: none;
       border-radius: 8px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #000;
+      background-color: #155ab6;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img id="userDp" src="default-dp.png" alt="Profile Picture">
-    <h2 id="userName">John Doe</h2>
-    <p><strong>Email:</strong> <span id="userEmail"></span></p>
-    <p><strong>Credit Card:</strong> <span id="userCreditCard"></span></p>
-    <p><strong>Date of Birth:</strong> <span id="userDob"></span></p>
-    <p><strong>UPI ID:</strong> <span id="userUpiId"></span></p>
-    <p><strong>Address:</strong> <span id="userAddress"></span></p>
-    <button onclick="window.location.href='edit-profile.html'">Edit Profile</button>
+    <h2>Your Profile</h2>
+    <div class="info" id="profileInfo"></div>
+    <button onclick="editProfile()">Edit Profile</button>
   </div>
 
   <script>
-    // Fetch user profile data from localStorage
-    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+    const profileData = JSON.parse(localStorage.getItem("userProfile"));
 
-    if (userProfile) {
-      // Update profile page with user data
-      document.getElementById("userDp").src = userProfile.dp || "default-dp.png";
-      document.getElementById("userName").textContent = `${userProfile.firstName} ${userProfile.lastName}`;
-      document.getElementById("userEmail").textContent = userProfile.email;
-      document.getElementById("userCreditCard").textContent = userProfile.creditCard;
-      document.getElementById("userDob").textContent = userProfile.dob;
-      document.getElementById("userUpiId").textContent = userProfile.upiId;
-      document.getElementById("userAddress").textContent = userProfile.address;
-    } else {
-      alert("No user data found. Redirecting to signup...");
+    if (!profileData) {
+      alert("No profile found! Redirecting to signup...");
       window.location.href = "signup.html";
+    }
+
+    // Display profile information
+    const profileInfo = document.getElementById("profileInfo");
+    function displayProfile() {
+      profileInfo.innerHTML = `
+        <p><strong>First Name:</strong> ${profileData.firstName}</p>
+        <p><strong>Last Name:</strong> ${profileData.lastName}</p>
+        <p><strong>Email:</strong> ${profileData.email}</p>
+        <p><strong>Credit Card:</strong> ${profileData.creditCard}</p>
+        <p><strong>Date of Birth:</strong> ${profileData.dob}</p>
+        <p><strong>UPI ID:</strong> ${profileData.upiId}</p>
+        <p><strong>Home Address:</strong> ${profileData.address}</p>
+      `;
+    }
+    displayProfile();
+
+    function editProfile() {
+      const newFirstName = prompt("Enter new First Name:", profileData.firstName);
+      const newLastName = prompt("Enter new Last Name:", profileData.lastName);
+      const newEmail = prompt("Enter new Email:", profileData.email);
+      const newCreditCard = prompt("Enter new Credit Card:", profileData.creditCard);
+      const newDob = prompt("Enter new Date of Birth:", profileData.dob);
+      const newUpiId = prompt("Enter new UPI ID:", profileData.upiId);
+      const newAddress = prompt("Enter new Home Address:", profileData.address);
+
+      // Update profile data
+      profileData.firstName = newFirstName || profileData.firstName;
+      profileData.lastName = newLastName || profileData.lastName;
+      profileData.email = newEmail || profileData.email;
+      profileData.creditCard = newCreditCard || profileData.creditCard;
+      profileData.dob = newDob || profileData.dob;
+      profileData.upiId = newUpiId || profileData.upiId;
+      profileData.address = newAddress || profileData.address;
+
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+      displayProfile();
     }
   </script>
 </body>
