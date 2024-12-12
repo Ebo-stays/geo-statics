@@ -1,107 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f6f8fc;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 400px;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
-    .info {
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #555;
-    }
-    .info strong {
-      color: #333;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #155ab6;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Your Profile</h2>
-    <div class="info" id="profileInfo"></div>
-    <button onclick="editProfile()">Edit Profile</button>
-  </div>
+    <div class="profile-container">
+        <h2>Welcome, <span id="usernameDisplay"></span></h2>
+        <button onclick="logout()">Logout</button>
+        <button onclick="location.href='edit-profile.html'">Edit Profile</button>
+    </div>
+    <script>
+        // Display username
+        const usernameDisplay = document.getElementById("usernameDisplay");
+        const username = localStorage.getItem("username");
+        if (!username) {
+            location.href = "index.html";
+        } else {
+            usernameDisplay.textContent = username;
+        }
 
-  <script>
-    const profileData = JSON.parse(localStorage.getItem("userProfile"));
-
-    if (!profileData) {
-      alert("No profile found! Redirecting to signup...");
-      window.location.href = "signup.html";
-    }
-
-    // Display profile information
-    const profileInfo = document.getElementById("profileInfo");
-    function displayProfile() {
-      profileInfo.innerHTML = `
-        <p><strong>First Name:</strong> ${profileData.firstName}</p>
-        <p><strong>Last Name:</strong> ${profileData.lastName}</p>
-        <p><strong>Email:</strong> ${profileData.email}</p>
-        <p><strong>Credit Card:</strong> ${profileData.creditCard}</p>
-        <p><strong>Date of Birth:</strong> ${profileData.dob}</p>
-        <p><strong>UPI ID:</strong> ${profileData.upiId}</p>
-        <p><strong>Home Address:</strong> ${profileData.address}</p>
-      `;
-    }
-    displayProfile();
-
-    function editProfile() {
-      const newFirstName = prompt("Enter new First Name:", profileData.firstName);
-      const newLastName = prompt("Enter new Last Name:", profileData.lastName);
-      const newEmail = prompt("Enter new Email:", profileData.email);
-      const newCreditCard = prompt("Enter new Credit Card:", profileData.creditCard);
-      const newDob = prompt("Enter new Date of Birth:", profileData.dob);
-      const newUpiId = prompt("Enter new UPI ID:", profileData.upiId);
-      const newAddress = prompt("Enter new Home Address:", profileData.address);
-
-      // Update profile data
-      profileData.firstName = newFirstName || profileData.firstName;
-      profileData.lastName = newLastName || profileData.lastName;
-      profileData.email = newEmail || profileData.email;
-      profileData.creditCard = newCreditCard || profileData.creditCard;
-      profileData.dob = newDob || profileData.dob;
-      profileData.upiId = newUpiId || profileData.upiId;
-      profileData.address = newAddress || profileData.address;
-
-      localStorage.setItem("userProfile", JSON.stringify(profileData));
-      displayProfile();
-    }
-  </script>
+        // Logout function
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            location.href = "index.html";
+        }
+    </script>
 </body>
 </html>

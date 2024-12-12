@@ -1,171 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Profile</title>
-  <script src="imagedata.js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      width: 400px;
-    }
-    h2 {
-      text-align: center;
-    }
-    input, button, select {
-      margin: 10px 0;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-    }
-    button {
-      background-color: #6a00dc;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-    button:hover {
-      background-color: #5300a8;
-    }
-    .illustrations {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .illustrations img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-    .illustrations img.selected {
-      border-color: #6a00dc;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Edit Profile</h2>
-    <input type="password" id="currentPassword" placeholder="Enter Current Password" />
-    <input type="text" id="name" placeholder="First Name" />
-    <input type="text" id="lastName" placeholder="Last Name" />
-    <input type="text" id="mobile" placeholder="Mobile Number" />
-    <input type="email" id="email" placeholder="Email" />
-    
-    <h4>Upload Profile Picture</h4>
-    <input type="file" id="dp" accept="image/*" />
-    <h4>Or Choose Default Illustration</h4>
-    <div class="illustrations" id="illustrationContainer"></div>
-    
-    <input type="password" id="newPassword" placeholder="New Password (Optional)" />
-    <input type="password" id="confirmNewPassword" placeholder="Confirm New Password (Optional)" />
-    <button onclick="saveProfile()">Save Changes</button>
-  </div>
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  <script>
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    // Redirect to login page if no user is logged in
-    if (!currentUser) {
-      alert("You need to log in first!");
-      window.location.href = "index.html";
+    const storedUsername = localStorage.getItem("username");
+    const storedPassword = localStorage.getItem("password");
+
+    if (storedUsername === username && storedPassword === password) {
+        localStorage.setItem("isLoggedIn", true);
+        location.href = "profile.html";
+    } else {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.textContent = "Invalid username or password. Please try again.";
+        errorMessage.style.display = "block";
     }
-
-    // Prefill user details
-    document.getElementById("name").value = currentUser.name || "";
-    document.getElementById("lastName").value = currentUser.lastName || "";
-    document.getElementById("mobile").value = currentUser.mobile || "";
-    document.getElementById("email").value = currentUser.email || "";
-
-    // Load illustrations into the UI
-    const illustrationContainer = document.getElementById("illustrationContainer");
-    let selectedIllustration = currentUser.dp || ""; // Store the selected illustration
-
-    illustrationImages.forEach((url) => {
-      const img = document.createElement("img");
-      img.src = url;
-      img.alt = "Illustration";
-      img.onclick = () => selectIllustration(url, img);
-      if (url === selectedIllustration) img.classList.add("selected");
-      illustrationContainer.appendChild(img);
-    });
-
-    // Select an illustration
-    function selectIllustration(url, img) {
-      selectedIllustration = url;
-      document.querySelectorAll(".illustrations img").forEach((el) => el.classList.remove("selected"));
-      img.classList.add("selected");
-    }
-
-    // Save profile changes
-    function saveProfile() {
-      const currentPassword = document.getElementById("currentPassword").value.trim();
-      const name = document.getElementById("name").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const mobile = document.getElementById("mobile").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const dpInput = document.getElementById("dp").files[0];
-      const newPassword = document.getElementById("newPassword").value.trim();
-      const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
-
-      if (currentPassword !== currentUser.password) {
-        alert("Incorrect current password!");
-        return;
-      }
-
-      if (newPassword && newPassword !== confirmNewPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
-
-      currentUser.name = name;
-      currentUser.lastName = lastName;
-      currentUser.mobile = mobile;
-      currentUser.email = email;
-
-      if (newPassword) currentUser.password = newPassword;
-
-      if (dpInput) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          currentUser.dp = event.target.result; // Save uploaded image
-          saveToStorage();
-        };
-        reader.readAsDataURL(dpInput);
-      } else if (selectedIllustration) {
-        currentUser.dp = selectedIllustration; // Save selected illustration
-        saveToStorage();
-      } else {
-        saveToStorage(); // No image changes
-      }
-    }
-
-    function saveToStorage() {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const updatedUsers = users.map((user) => (user.id === currentUser.id ? currentUser : user));
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      alert("Profile updated successfully!");
-      window.location.href = "profile.html";
-    }
-  </script>
-</body>
-</html>
+});

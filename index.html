@@ -1,89 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      width: 400px;
-    }
-    input, button {
-      margin: 15px 0;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-    }
-    button {
-      background-color: #6a00dc;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-    button:hover {
-      background-color: #5300a8;
-    }
-    .hint {
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Login</h2>
-    <p class="hint">Enter your Apple ID, Email ID, or Mobile Number</p>
-    <input type="text" id="userInput" placeholder="Enter your Apple ID, Email ID, or Mobile Number" required />
-    <button onclick="checkUser()">Next</button>
-  </div>
-  <script>
-    // Automatically redirect if logged in before
-    const loggedInUser = localStorage.getItem("currentUser");
-    if (loggedInUser) {
-      window.location.href = "password.html";
-    }
-
-    function checkUser() {
-      const userInput = document.getElementById("userInput").value.trim();
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      let user;
-
-      // Check if input is Apple ID, Email ID, or Mobile Number
-      if (userInput.includes("@")) {
-        // If it contains "@", check for Email ID or Apple ID
-        user = users.find(u => u.id === userInput || u.email === userInput);
-      } else {
-        // Otherwise, treat it as a Mobile Number
-        user = users.find(u => u.mobile === userInput);
-      }
-
-      if (user) {
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        window.location.href = "password.html";
-      } else {
-        alert("User not registered! Redirecting to signup.");
-        window.location.href = "signup.html";
-      }
-    }
-  </script>
+    <div class="login-container">
+        <form id="loginForm" class="login-form">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="error-message" class="error-message"></p>
+            <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
